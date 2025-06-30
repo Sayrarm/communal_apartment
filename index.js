@@ -4,11 +4,11 @@ document.body.appendChild(app);
 
 // Тарифы
 const tariffs = {
-    electricity: { t1: 6.5, t2: 2.5 },
-    water: { cold: 40.0, hot: 180.0, drainage: 30.0 },
-    heating: 45.0,
-    intercom: 150.0,
-    apartmentArea: 60
+    electricity: { t1: 7.45, t2: 3.02 },
+    water: { cold: 59.80, hot: 272.14, drainage: 45.71 },
+    heating: 1878.19,
+    intercom: 68.54,
+    debtSection: 0
 };
 
 // Контейнер
@@ -72,11 +72,12 @@ form.appendChild(waterSection);
 
 // Отопление
 const heatingSection = createSection('Отопление');
-heatingSection.appendChild(createInput('Площадь квартиры (м²):', 'apartment-area', 'number', tariffs.apartmentArea));
+heatingSection.appendChild(createInput('Абонен. плата:', 'apartment-area', 'number', tariffs.apartmentArea));
 form.appendChild(heatingSection);
 
 // Домофон
 const intercomSection = createSection('Домофон');
+intercomSection.appendChild(createInput('Абонен. плата:', 'intercom', 'number'))
 form.appendChild(intercomSection);
 
 // Долг
