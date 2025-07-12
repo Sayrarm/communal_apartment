@@ -1,8 +1,12 @@
+//контейнер для всего приложения
 const container = document.createElement('div');
 container.className = 'container';
 document.body.appendChild(container);
 
-const modalTariffs = createModal('Тарифы');
+//модальное окно с тарифами
+const modalTariffs = createModal('Действующие тарифы');
+modalTariffs.className = 'container';
+modalTariffs.appendChild(createTariffsWindow());
 
 //кнопка для открытия модального окна с тарифами
 const tariffsModalWindowButton = createButton('Тарифы');
@@ -12,30 +16,19 @@ document.getElementById("tariffs-Modal-Window-Button").onclick = () => {
     disableScroll();
 };
 
-
+//название приложения
 const title = document.createElement('h1');
 title.className = 'title';
 title.textContent = 'Калькулятор коммунальных платежей';
 container.appendChild(title);
 
-//тарифы
-const electricPower = createSection('Электроэнергия');
-electricPower.appendChild(createInput('Тариф Т1 (кВт·ч):', 'electricity-t1', 'number'));
-electricPower.appendChild(createInput('Тариф Т2 (кВт·ч):', 'electricity-t2', 'number'));
+//строки для ввода данных для расчета:
+container.appendChild(createTariffsWindow());
 
-const waterSupply = createSection('Водоснабжение');
-waterSupply.appendChild(createInput('Холодная вода (м3):', 'cold-water', 'number'));
-waterSupply.appendChild(createInput('Горячая вода (м3):', 'hot-water', 'number'));
-waterSupply.appendChild(createInput('Водоотведение (м3):', 'water-disposal', 'number'));
-
-const heating = createSection('Отопление');
-heating.appendChild(createInput('Отопление (абон. плата):', 'heating', 'number'));
-
-const intercomSystem = createSection('Домофон');
-intercomSystem.appendChild(createInput('Домофон (абон. плата):', 'intercom', 'number'));
-
+//строка для ввода долга за прошлый месяц
 const debt = createSection('Долг за прошлый месяц');
 debt.appendChild(createInput('Долг за прошлый месяц:', 'debt', 'number'));
+container.appendChild(debt);
 
 //кнопка для расчета
 const calculateButton = createButton('Рассчитать');

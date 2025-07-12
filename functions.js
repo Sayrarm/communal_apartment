@@ -2,7 +2,6 @@
 function createSection (titleText) {
     const section = document.createElement('div');
     section.className = 'section';
-    container.appendChild(section);
 
     const sectionTitle = document.createElement('h3');
     sectionTitle.className = 'section-title';
@@ -31,6 +30,33 @@ function createInput (labelText, id, type, defaultValue = '') {
     return group;
 }
 
+function createTariffsWindow () {
+
+    const containerTariffs = document.createElement('div');
+    containerTariffs.className = 'tariffs-container';
+
+    const electricPower = createSection('Электроэнергия');
+    electricPower.appendChild(createInput('Тариф Т1 (кВт·ч):', 'electricity-t1', 'number'));
+    electricPower.appendChild(createInput('Тариф Т2 (кВт·ч):', 'electricity-t2', 'number'));
+    containerTariffs.appendChild(electricPower);
+
+    const waterSupply = createSection('Водоснабжение');
+    waterSupply.appendChild(createInput('Холодная вода (м3):', 'cold-water', 'number'));
+    waterSupply.appendChild(createInput('Горячая вода (м3):', 'hot-water', 'number'));
+    waterSupply.appendChild(createInput('Водоотведение (м3):', 'water-disposal', 'number'));
+    containerTariffs.appendChild(waterSupply);
+
+    const heating = createSection('Отопление');
+    heating.appendChild(createInput('Отопление (абон. плата):', 'heating', 'number'));
+    containerTariffs.appendChild(heating);
+
+    const intercomSystem = createSection('Домофон');
+    intercomSystem.appendChild(createInput('Домофон (абон. плата):', 'intercom', 'number'));
+    containerTariffs.appendChild(intercomSystem);
+
+    return containerTariffs;
+}
+
 //функция для создания кнопок
 function createButton (buttonText) {
     const button = document.createElement('button');
@@ -46,8 +72,12 @@ function createModal (modalText) {
 
     const modal = document.createElement('dialog');
     modal.className = 'modal';
-    modal.textContent = modalText;
     container.appendChild(modal);
+
+    const modalTitle = document.createElement('h3');
+    modalTitle.textContent = modalText;
+    modalTitle.className = 'title';
+    modal.appendChild(modalTitle);
 
     const saveButton = createButton('Сохранить');
     modal.appendChild(saveButton);
