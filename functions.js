@@ -30,6 +30,7 @@ function createInput (labelText, id, type, defaultValue = '') {
     return group;
 }
 
+//функция для создания тарифов
 function createTariffsWindow () {
 
     const containerTariffs = document.createElement('div');
