@@ -42,12 +42,33 @@ function createButton (buttonText) {
 }
 
 //функция для создания модального окна
-function createModal () {
+function createModal (modalText) {
 
     const modal = document.createElement('dialog');
     modal.className = 'modal';
-    modal.textContent = 'Тарифы';
+    modal.textContent = modalText;
     container.appendChild(modal);
 
+    const saveButton = createButton('Сохранить');
+    modal.appendChild(saveButton);
+
+    const closeButton = createButton('Закрыть');
+    closeButton.id = 'close-button'
+    document.getElementById('close-button').onclick = () => {
+        modal.close();
+        enableScroll();
+    }
+    modal.appendChild(closeButton);
+
     return modal;
+}
+
+// Функция для запрета скролла
+function disableScroll() {
+    document.body.style.overflow = 'hidden';
+}
+
+// Функция для разрешения скролла
+function enableScroll() {
+    document.body.style.overflow = '';
 }
