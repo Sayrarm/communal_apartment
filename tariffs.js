@@ -39,11 +39,6 @@ function calculator () {
 
     const totalWaterCalculation = coldWaterCalculation + hotWaterCalculation + disposalWaterCalculation;
 
-
-
-
-
-
-
+    return totalElectricCalculation + totalWaterCalculation + tariffs.heating + tariffs.intercom + parseFloat(document.getElementById('debt-last').value);
 }
 

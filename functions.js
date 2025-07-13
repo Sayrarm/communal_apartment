@@ -59,14 +59,14 @@ function createTariffsWindow (T1, T2, cold, hot, disposal, debt, heat, intercom)
     // Отопление (добавляем, только если heat !== undefined)
     if (heat !== undefined) {
         const heating = createSection('Отопление');
-        heating.appendChild(createInput('Отопление (абон. плата):', heat, 'number'));
+        heating.appendChild(createInput('Отопление (абон. плата):', heat, 'number', tariffs.heating));
         containerTariffs.appendChild(heating);
     }
 
     // Домофон (добавляем, только если intercom !== undefined)
     if (intercom !== undefined) {
         const intercomSystem = createSection('Домофон');
-        intercomSystem.appendChild(createInput('Домофон (абон. плата):', intercom, 'number'));
+        intercomSystem.appendChild(createInput('Домофон (абон. плата):', intercom, 'number', tariffs.intercom));
         containerTariffs.appendChild(intercomSystem);
     }
 
