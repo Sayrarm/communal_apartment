@@ -14,7 +14,7 @@ const tariffs = {
     debt: 0
 };
 
-
+/*
 parseFloat(document.getElementById('t1-tariff').value)
 parseFloat(document.getElementById('t2-tariff').value)
 parseFloat(document.getElementById('hot-tariff').value)
@@ -22,6 +22,7 @@ parseFloat(document.getElementById('cold-tariff').value)
 parseFloat(document.getElementById('disposal-tariff').value)
 parseFloat(document.getElementById('heating-tariff').value)
 parseFloat(document.getElementById('intercom-tariff').value)
+*/
 
 
 function calculator () {
