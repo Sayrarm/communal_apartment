@@ -30,30 +30,32 @@ function createInput (labelText, id, type, defaultValue = '') {
     return group;
 }
 
-//функция для создания тарифов
-function createTariffsWindow () {
+//функция для создания ввода-граф для тарифов
+function createTariffsWindow (T1, T2, hot, cold, disposal, heat, intercom) {
 
     const containerTariffs = document.createElement('div');
     containerTariffs.className = 'tariffs-container';
 
     const electricPower = createSection('Электроэнергия');
-    electricPower.appendChild(createInput('Тариф Т1 (кВт·ч):', 'electricity-t1', 'number'));
-    electricPower.appendChild(createInput('Тариф Т2 (кВт·ч):', 'electricity-t2', 'number'));
+    electricPower.appendChild(createInput('Тариф Т1 (кВт·ч):', T1, 'number'));
+    electricPower.appendChild(createInput('Тариф Т2 (кВт·ч):', T2, 'number'));
     containerTariffs.appendChild(electricPower);
 
     const waterSupply = createSection('Водоснабжение');
-    waterSupply.appendChild(createInput('Холодная вода (м3):', 'cold-water', 'number'));
-    waterSupply.appendChild(createInput('Горячая вода (м3):', 'hot-water', 'number'));
-    waterSupply.appendChild(createInput('Водоотведение (м3):', 'water-disposal', 'number'));
+    waterSupply.appendChild(createInput('Холодная вода (м3):', cold, 'number'));
+    waterSupply.appendChild(createInput('Горячая вода (м3):', hot, 'number'));
+    waterSupply.appendChild(createInput('Водоотведение (м3):', disposal, 'number'));
     containerTariffs.appendChild(waterSupply);
 
     const heating = createSection('Отопление');
-    heating.appendChild(createInput('Отопление (абон. плата):', 'heating', 'number'));
+    heating.appendChild(createInput('Отопление (абон. плата):', heat, 'number'));
     containerTariffs.appendChild(heating);
 
     const intercomSystem = createSection('Домофон');
-    intercomSystem.appendChild(createInput('Домофон (абон. плата):', 'intercom', 'number'));
+    intercomSystem.appendChild(createInput('Домофон (абон. плата):', intercom, 'number'));
     containerTariffs.appendChild(intercomSystem);
+
+
 
     return containerTariffs;
 }
