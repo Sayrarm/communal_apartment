@@ -118,3 +118,7 @@ function disableScroll() {
 function enableScroll() {
     document.body.style.overflow = '';
 }
+
+function addResult () {
+    resultSection.style.display = 'flex';
+}

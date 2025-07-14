@@ -39,6 +39,23 @@ containerWithTariffs.appendChild(tariffsForThisMonth);
 
 //кнопка для расчета
 const calculateButton = createButton('Рассчитать');
+calculateButton.id = 'calculate-button';
+document.getElementById('calculate-button').onclick = () => {
+    addResult();
+    calculator();
+};
 
+//контейнер с результатами расчета
+const resultSection = document.createElement('div');
+resultSection.className = 'result';
+resultSection.style.display = 'none';
 
+const resultTitle = document.createElement('h3');
+resultTitle.textContent = 'Результаты расчета';
+resultSection.appendChild(resultTitle);
+
+const resultsContainer = document.createElement('div');
+resultSection.appendChild(resultsContainer);
+
+container.appendChild(resultSection);
 

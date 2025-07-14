@@ -35,10 +35,15 @@ function calculator () {
     const coldWaterCalculation = coldWater * tariffs.water.cold;
     const hotWater = (parseFloat(document.getElementById('hot-current').value) - parseFloat(document.getElementById('hot-last').value));
     const hotWaterCalculation = hotWater * tariffs.water.hot;
-    const disposalWaterCalculation = (coldWater - hotWater) * tariffs.water.disposal;
+    const disposalWaterCalculation = (coldWater + hotWater) * tariffs.water.disposal;
 
     const totalWaterCalculation = coldWaterCalculation + hotWaterCalculation + disposalWaterCalculation;
 
-    return totalElectricCalculation + totalWaterCalculation + tariffs.heating + tariffs.intercom + parseFloat(document.getElementById('debt-last').value);
+    const totalCalculation = totalElectricCalculation + totalWaterCalculation + tariffs.heating + tariffs.intercom + parseFloat(document.getElementById('debt-last').value);
+
+    const total = document.createElement('div');
+    total.className = 'result-item total';
+    total.textContent = `Всего к оплате: ${totalCalculation}`;
+    resultsContainer.appendChild(total);
 }
 
