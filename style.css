@@ -135,6 +135,9 @@ button:hover {
     .input-group {
         flex-wrap: wrap;
     }
+    #tariffs-Modal-Window-Button {
+        position: static;
+    }
 }
 
 @media (max-width: 752px) {
