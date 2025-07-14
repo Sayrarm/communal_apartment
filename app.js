@@ -5,7 +5,7 @@ document.body.appendChild(container);
 
 //модальное окно с тарифами
 const modalTariffs = createModal('Действующие тарифы');
-modalTariffs.className = 'container';
+modalTariffs.className = 'modal-container';
 modalTariffs.appendChild(createTariffsWindow('t1-tariff', 't2-tariff', 'cold-tariff', 'hot-tariff', 'disposal-tariff', undefined, 'heating-tariff', 'intercom-tariff'));
 
 //кнопка для открытия модального окна с тарифами
@@ -23,19 +23,19 @@ title.textContent = 'Калькулятор коммунальных плате�
 container.appendChild(title);
 
 //строки для ввода данных для расчета:
-const containerWithTariffs = createSection('');
-containerWithTariffs.className = 'container-with-tariffs';
-container.appendChild(containerWithTariffs);
+const containerWithInput = createSection('');
+containerWithInput.className = 'container-with-input';
+container.appendChild(containerWithInput);
 
 const tariffsForLastMonth = createSection('Прошлый месяц');
 tariffsForLastMonth.className = 'tariffs-for-lastMonth';
 tariffsForLastMonth.appendChild(createTariffsWindow('t1-last', 't2-last', 'cold-last', 'hot-last', 'disposal-last', 'debt-last', undefined, undefined));
-containerWithTariffs.appendChild(tariffsForLastMonth);
+containerWithInput.appendChild(tariffsForLastMonth);
 
 const tariffsForThisMonth = createSection('Текущий месяц');
 tariffsForThisMonth.className = 'tariffs-for-thisMonth';
 tariffsForThisMonth.appendChild(createTariffsWindow('t1-current', 't2-current', 'cold-current', 'hot-current', 'disposal-current', 'debt-current', 'heat-current', 'intercom-current'));
-containerWithTariffs.appendChild(tariffsForThisMonth);
+containerWithInput.appendChild(tariffsForThisMonth);
 
 //кнопка для расчета
 const calculateButton = createButton('Рассчитать');

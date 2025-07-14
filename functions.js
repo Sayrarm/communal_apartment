@@ -59,14 +59,14 @@ function createTariffsWindow (T1, T2, cold, hot, disposal, debt, heat, intercom)
     // Отопление (добавляем, только если heat !== undefined)
     if (heat !== undefined) {
         const heating = createSection('Отопление');
-        heating.appendChild(createInput('Отопление (абон. плата):', heat, 'number', tariffs.heating));
+        heating.appendChild(createInput('Абон. плата:', heat, 'number', tariffs.heating));
         containerTariffs.appendChild(heating);
     }
 
     // Домофон (добавляем, только если intercom !== undefined)
     if (intercom !== undefined) {
         const intercomSystem = createSection('Домофон');
-        intercomSystem.appendChild(createInput('Домофон (абон. плата):', intercom, 'number', tariffs.intercom));
+        intercomSystem.appendChild(createInput('Абон. плата:', intercom, 'number', tariffs.intercom));
         containerTariffs.appendChild(intercomSystem);
     }
 
@@ -88,15 +88,19 @@ function createModal (modalText) {
 
     const modal = document.createElement('dialog');
     modal.className = 'modal';
-    container.appendChild(modal);
+    document.body.appendChild(modal);
 
     const modalTitle = document.createElement('h3');
     modalTitle.textContent = modalText;
-    modalTitle.className = 'title';
+    modalTitle.className = 'section-title';
     modal.appendChild(modalTitle);
 
+    const buttonSection = document.createElement('div');
+    buttonSection.className = 'button-section';
+    modal.appendChild(buttonSection);
+
     const saveButton = createButton('Сохранить');
-    modal.appendChild(saveButton);
+    buttonSection.appendChild(saveButton);
 
     const closeButton = createButton('Закрыть');
     closeButton.id = 'close-button'
@@ -104,7 +108,7 @@ function createModal (modalText) {
         modal.close();
         enableScroll();
     }
-    modal.appendChild(closeButton);
+    buttonSection.appendChild(closeButton);
 
     return modal;
 }

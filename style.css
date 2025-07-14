@@ -1,76 +1,108 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f5f5f5;
+    font-family: TikTok Sans, monospace;
+    font-size: 14px;
+    color: white;
+    text-transform: uppercase;
+    background-color: #283747;
 }
 .container {
-    background-color: white;
+    background-color: #34495e;
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 5px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-.container-with-tariffs {
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
 }
-.dept-container {
+.modal-container {
+    background-color: #283747;
+    color: white;
+    border-radius: 8px;
+    border-color: transparent;
+}
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px); /* Уровень размытия */
+}
+.container-with-input {
     display: flex;
-    justify-content: center;
+}
+.tariffs-for-lastMonth,
+.tariffs-for-thisMonth {
+    padding: 2px;
 }
 h1 {
-    color: #2c3e50;
     text-align: center;
+    font-weight: 300;
+}
+h3 {
+    text-transform: uppercase;
+    font-weight: 300;
 }
 .section {
     margin-bottom: 20px;
     padding: 15px;
-    border: 1px solid #ddd;
+    border: 1px solid #d5d8dc;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
 }
 .section-title {
+    font-size: 18px;
+    font-weight: 300;
     margin-top: 0;
     display: flex;
     justify-content: center;
-    color: #3498db;
 }
 .input-group {
     margin-bottom: 10px;
     display: flex;
-    justify-content: space-between;
+    gap: 5px;
+    justify-content: flex-end;
     align-items: center;
-}
-label {
-    margin-right: 10px;
 }
 input {
     padding: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid #d5d8dc;
     border-radius: 4px;
+    background-color: #283747;
+    color: white;
 }
 button {
-    background-color: #3498db;
-    color: white;
+    background-color: #d5d8dc;
+    color: #283747;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 600;
     border: none;
     padding: 10px 15px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
-    display: block;
-    margin: 20px auto;
+    margin: 5px;
 }
 button:hover {
-    background-color: #2980b9;
+    background-color: #aeb6bf;
+    color: white;
+}
+#tariffs-Modal-Window-Button {
+    position: absolute;
+    right: 2px;
+    top: 17px;
+}
+.button-section {
+    display: flex;
+    justify-content: center;
+    margin: 2px;
 }
 .result {
+    text-transform: uppercase;
+    font-weight: 300;
     margin-top: 20px;
     padding: 15px;
-    background-color: #f8f9fa;
+    background-color: #283747;
     border-radius: 5px;
     flex-direction: column;
     align-items: center;
@@ -81,9 +113,8 @@ button:hover {
     margin-bottom: 8px;
 }
 .total {
-    font-weight: bold;
-    font-size: 18px;
-    border-top: 1px solid #ddd;
+    font-size: 16px;
+    border-top: 1px solid #d5d8dc;
     padding-top: 10px;
     margin-top: 10px;
 }
