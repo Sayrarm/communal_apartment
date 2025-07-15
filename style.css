@@ -55,9 +55,11 @@ h3 {
     flex-direction: column;
 }
 .section-title {
+    color: #5499c7;
     font-size: 18px;
     font-weight: 300;
     margin-top: 0;
+    margin-bottom: 5px;
     display: flex;
     justify-content: center;
 }
