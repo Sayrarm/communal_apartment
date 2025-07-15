@@ -29,12 +29,12 @@ container.appendChild(containerWithInput);
 
 const tariffsForLastMonth = createSection('Прошлый месяц');
 tariffsForLastMonth.className = 'tariffs-for-lastMonth';
-tariffsForLastMonth.appendChild(createTariffsWindow('t1-last', 't2-last', 'cold-last', 'hot-last', 'disposal-last', 'debt-last', undefined, undefined));
+tariffsForLastMonth.appendChild(createTariffsWindow('t1-last', 't2-last', 'cold-last', 'hot-last', undefined, 'debt-last', undefined, undefined));
 containerWithInput.appendChild(tariffsForLastMonth);
 
 const tariffsForThisMonth = createSection('Текущий месяц');
 tariffsForThisMonth.className = 'tariffs-for-thisMonth';
-tariffsForThisMonth.appendChild(createTariffsWindow('t1-current', 't2-current', 'cold-current', 'hot-current', 'disposal-current', 'debt-current', 'heat-current', 'intercom-current'));
+tariffsForThisMonth.appendChild(createTariffsWindow('t1-current', 't2-current', 'cold-current', 'hot-current', undefined, 'debt-current', 'heat-current', 'intercom-current'));
 containerWithInput.appendChild(tariffsForThisMonth);
 
 //кнопка для расчета

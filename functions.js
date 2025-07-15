@@ -43,11 +43,13 @@ function createTariffsWindow (T1, T2, cold, hot, disposal, debt, heat, intercom)
     containerTariffs.appendChild(electricPower);
 
     //водоснабжение
-    const waterSupply = createSection('Водоснабжение');
-    waterSupply.appendChild(createInput('Холодная вода (м3):', cold, 'number'));
-    waterSupply.appendChild(createInput('Горячая вода (м3):', hot, 'number'));
-    waterSupply.appendChild(createInput('Водоотведение (м3):', disposal, 'number'));
-    containerTariffs.appendChild(waterSupply);
+    if (disposal !== undefined) {
+        const waterSupply = createSection('Водоснабжение');
+        waterSupply.appendChild(createInput('Холодная вода (м3):', cold, 'number'));
+        waterSupply.appendChild(createInput('Горячая вода (м3):', hot, 'number'));
+        waterSupply.appendChild(createInput('Водоотведение (м3):', disposal, 'number'));
+        containerTariffs.appendChild(waterSupply);
+    }
 
     //долг (добавляем, только если debt !== undefined)
     if (debt !== undefined) {
