@@ -24,26 +24,61 @@ parseFloat(document.getElementById('heating-tariff').value)
 parseFloat(document.getElementById('intercom-tariff').value)
 */
 
+//функция для получения данных из ввода
+function getInputValue(id) {
+    const element = document.getElementById(id);
 
+    if (!element) { // Если элемента нет
+        return 0;
+    }
+
+    const number = parseFloat(element.value);
+
+    if (isNaN(number)) { // Если не число
+        return 0;
+    }
+
+    return number;
+}
+
+//основной калькулятор для подсчета коммуналки
 function calculator () {
-    const electricCalculationT1 = (parseFloat(document.getElementById('t1-current').value) - parseFloat(document.getElementById('t1-last').value)) * tariffs.electro.t1;
-    const electricCalculationT2 = (parseFloat(document.getElementById('t2-current').value) - parseFloat(document.getElementById('t2-last').value)) * tariffs.electro.t2;
+
+    //переменные для использования введенных данных (если данных нет, то по умолчанию применяется 0)
+    const inputT1Last = getInputValue('t1-last');
+    const inputT1Current = getInputValue('t1-current');
+    const inputT2Last = getInputValue('t2-last');
+    const inputT2Current = getInputValue('t2-current');
+
+    const inputColdWaterLast = getInputValue('cold-last');
+    const inputColdWaterCurrent = getInputValue('cold-current');
+    const inputHotWaterLast = getInputValue('hot-last');
+    const inputHotWaterCurrent = getInputValue('hot-current');
+
+    const inputDebtLast = getInputValue('debt-last');
+    const inputDebtCurrent = getInputValue('debt-current');
+
+    //подсчеты данных
+    const electricCalculationT1 = (inputT1Current - inputT1Last) * tariffs.electro.t1;
+    const electricCalculationT2 = (inputT2Current - inputT2Last) * tariffs.electro.t2;
 
     const totalElectricCalculation = electricCalculationT1 + electricCalculationT2;
 
-    const coldWater = (parseFloat(document.getElementById('cold-current').value) - parseFloat(document.getElementById('cold-last').value));
+    const coldWater = (inputColdWaterCurrent - inputColdWaterLast);
     const coldWaterCalculation = coldWater * tariffs.water.cold;
-    const hotWater = (parseFloat(document.getElementById('hot-current').value) - parseFloat(document.getElementById('hot-last').value));
+    const hotWater = (inputHotWaterCurrent - inputHotWaterLast);
     const hotWaterCalculation = hotWater * tariffs.water.hot;
     const disposalWaterCalculation = (coldWater + hotWater) * tariffs.water.disposal;
 
     const totalWaterCalculation = coldWaterCalculation + hotWaterCalculation + disposalWaterCalculation;
 
-    const totalCalculation = totalElectricCalculation + totalWaterCalculation + tariffs.heating + tariffs.intercom + parseFloat(document.getElementById('debt-last').value);
+    const totalCalculation = totalElectricCalculation + totalWaterCalculation + tariffs.heating + tariffs.intercom + inputDebtLast;
 
+    //выводим в интерфейс результат подсчета
     const total = document.createElement('div');
     total.className = 'result-item total';
-    total.textContent = `Всего к оплате: ${totalCalculation}`;
+    total.textContent = `Всего к оплате: ${totalCalculation} руб.`;
     resultsContainer.appendChild(total);
-}
 
+    return total;
+}
