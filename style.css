@@ -45,6 +45,10 @@ h3 {
     text-transform: uppercase;
     font-weight: 300;
 }
+label {
+    text-transform: uppercase;
+    font-weight: 300;
+}
 .section {
     margin-bottom: 15px;
     padding: 5px;
