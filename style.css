@@ -47,7 +47,7 @@ h3 {
 }
 .section {
     margin-bottom: 15px;
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #d5d8dc;
     border-radius: 5px;
     max-width: 100%;
@@ -70,10 +70,12 @@ h3 {
 }
 input {
     padding: 5px;
+    width: 100px;
     border: 1px solid #d5d8dc;
     border-radius: 4px;
     background-color: #283747;
     color: white;
+    font-size: 16px;
 }
 button {
     background-color: #d5d8dc;
@@ -142,7 +144,14 @@ button:hover {
 
 @media (max-width: 752px) {
     input {
-        width: 100%;
+        width: 100px;
         max-width: 100%;
+    }
+}
+
+@media (max-width: 615px) {
+    .input-group {
+        justify-content: center;
+        flex-direction: column;
     }
 }
