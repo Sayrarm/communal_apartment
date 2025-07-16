@@ -169,4 +169,9 @@ button:hover {
         justify-content: center;
         flex-direction: column;
     }
+
+    .result {
+        max-width: 330px;
+        width: 100%;
+    }
 }
