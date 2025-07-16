@@ -44,6 +44,9 @@ function getInputValue(id) {
 //основной калькулятор для подсчета коммуналки
 function calculator () {
 
+    // 1. Очищаем контейнер перед добавлением новых результатов
+    resultsContainer.textContent = '';
+
     //переменные для использования введенных данных (если данных нет, то по умолчанию применяется 0)
     const inputT1Last = getInputValue('t1-last');
     const inputT1Current = getInputValue('t1-current');
@@ -99,6 +102,7 @@ function calculator () {
 
     total.appendChild(addCalculationLine('Всего к оплате', totalCalculation.toFixed(1)));
 
-
+    //показ контейнера с результатами расчета
+    resultSection.style.display = 'flex';
     return total;
 }

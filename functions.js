@@ -152,8 +152,3 @@ function disableScroll() {
 function enableScroll() {
     document.body.style.overflow = '';
 }
-
-//показ контейнера с результатами расчета
-function addResult () {
-    resultSection.style.display = 'flex';
-}

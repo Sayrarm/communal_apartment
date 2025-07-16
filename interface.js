@@ -40,10 +40,7 @@ containerWithInput.appendChild(tariffsForThisMonth);
 //кнопка для расчета
 const calculateButton = createButton('Рассчитать');
 calculateButton.id = 'calculate-button';
-document.getElementById('calculate-button').onclick = () => {
-    addResult();
-    calculator();
-};
+document.getElementById('calculate-button').onclick = () => calculator();
 
 //контейнер с результатами расчета
 const resultSection = document.createElement('div');
