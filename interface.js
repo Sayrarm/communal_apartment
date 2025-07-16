@@ -55,6 +55,7 @@ resultTitle.textContent = 'Результаты расчета';
 resultSection.appendChild(resultTitle);
 
 const resultsContainer = document.createElement('div');
+resultsContainer.className = 'results-container';
 resultSection.appendChild(resultsContainer);
 
 container.appendChild(resultSection);

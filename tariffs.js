@@ -68,18 +68,37 @@ function calculator () {
     const hotWater = (inputHotWaterCurrent - inputHotWaterLast);
     const hotWaterCalculation = hotWater * tariffs.water.hot;
     const disposalWaterCalculation = (coldWater + hotWater) * tariffs.water.disposal;
-
     const totalWaterCalculation = coldWaterCalculation + hotWaterCalculation + disposalWaterCalculation;
 
     const totalCalculation = totalElectricCalculation + totalWaterCalculation + tariffs.heating + tariffs.intercom + inputDebtLast;
 
     //выводим в интерфейс результат подсчета
+    const electricCalc = addCalculationSection();
+    electricCalc.appendChild(addCalculationLine('Электроэнергия Т1', electricCalculationT1));
+    electricCalc.appendChild(addCalculationLine('Электроэнергия Т2', electricCalculationT2));
+    electricCalc.appendChild(addCalculationLine('Электроэнергия ИТОГ', totalElectricCalculation));
 
+    const waterCalc = addCalculationSection()
+    waterCalc.appendChild(addCalculationLine('Холодная вода', coldWaterCalculation));
+    waterCalc.appendChild(addCalculationLine('Горячая вода', hotWaterCalculation));
+    waterCalc.appendChild(addCalculationLine('Водоотведение', disposalWaterCalculation));
+    waterCalc.appendChild(addCalculationLine('Водоснабжение ИТОГ', totalWaterCalculation));
+
+    const heatingCalc = addCalculationSection();
+    heatingCalc.appendChild(addCalculationLine('Отопление', tariffs.heating));
+
+    const intercomCalc = addCalculationSection();
+    intercomCalc.appendChild(addCalculationLine('Домофон', tariffs.intercom));
+
+    const debtCalc = addCalculationSection();
+    debtCalc.appendChild(addCalculationLine('Долг за прошлый месяц', inputDebtLast));
 
     const total = document.createElement('div');
-    total.className = 'result-item total';
-    total.textContent = `Всего к оплате: ${totalCalculation.toFixed(1)} руб.`;
+    total.className = 'result-item-total';
     resultsContainer.appendChild(total);
+
+    total.appendChild(addCalculationLine('Всего к оплате', totalCalculation.toFixed(1)));
+
 
     return total;
 }

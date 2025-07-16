@@ -118,17 +118,26 @@ button:hover {
     border-radius: 5px;
     flex-direction: column;
     align-items: center;
+    max-width: 562px;
+    width: 100%;
+}
+.results-container {
+    max-width: 100%;
+    width: 100%;
+}
+.calc-section {
+    border-top: 1px solid #d5d8dc;
+    padding: 5px 0;
 }
 .result-item {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
+    padding: 3px 0;
 }
-.total {
-    font-size: 16px;
+.result-item-total {
+    font-weight: 600;
+    font-size: 18px;
     border-top: 1px solid #d5d8dc;
-    padding-top: 10px;
-    margin-top: 10px;
 }
 .error {
     color: red;

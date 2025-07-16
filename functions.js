@@ -11,12 +11,32 @@ function createSection (titleText) {
     return section;
 }
 
-const addCalculationLine = (name, value) => {
-    const item = document.createElement('div');
-    item.className = 'result-item';
-    item.innerHTML = `<span>${name}:</span><span>${value} руб</span>`;
-    resultsContainer.appendChild(item);
-};
+//функция для создания секции расчетов
+function addCalculationSection () {
+    const totalSection = document.createElement('div');
+    totalSection.className = 'calc-section';
+    resultsContainer.appendChild(totalSection);
+
+    return totalSection;
+}
+
+//функция для создания строки для расчета
+function addCalculationLine (name, value) {
+
+    const line = document.createElement('div');
+    line.className = 'result-item';
+
+    const lineName = document.createElement('div');
+    lineName.textContent = `${name}: `;
+
+    const valueName = document.createElement('div');
+    valueName.textContent = `${value} руб.`;
+
+    line.append(lineName, ' ', valueName);
+    resultsContainer.appendChild(line);
+
+    return line;
+}
 
 //функция для создания графы для подсчета
 function createInput (labelText, id, type, defaultValue = '') {
@@ -50,13 +70,14 @@ function createTariffsWindow (T1, T2, cold, hot, disposal, debt, heat, intercom)
     containerTariffs.appendChild(electricPower);
 
     //водоснабжение
+    const waterSupply = createSection('Водоснабжение');
+    waterSupply.appendChild(createInput('Холодная вода (м3):', cold, 'number'));
+    waterSupply.appendChild(createInput('Горячая вода (м3):', hot, 'number'));
+
     if (disposal !== undefined) {
-        const waterSupply = createSection('Водоснабжение');
-        waterSupply.appendChild(createInput('Холодная вода (м3):', cold, 'number'));
-        waterSupply.appendChild(createInput('Горячая вода (м3):', hot, 'number'));
         waterSupply.appendChild(createInput('Водоотведение (м3):', disposal, 'number'));
-        containerTariffs.appendChild(waterSupply);
     }
+    containerTariffs.appendChild(waterSupply);
 
     //долг (добавляем, только если debt !== undefined)
     if (debt !== undefined) {
