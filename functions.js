@@ -11,6 +11,13 @@ function createSection (titleText) {
     return section;
 }
 
+const addCalculationLine = (name, value) => {
+    const item = document.createElement('div');
+    item.className = 'result-item';
+    item.innerHTML = `<span>${name}:</span><span>${value} руб</span>`;
+    resultsContainer.appendChild(item);
+};
+
 //функция для создания графы для подсчета
 function createInput (labelText, id, type, defaultValue = '') {
     const group = document.createElement('div');
@@ -125,6 +132,7 @@ function enableScroll() {
     document.body.style.overflow = '';
 }
 
+//показ контейнера с результатами расчета
 function addResult () {
     resultSection.style.display = 'flex';
 }

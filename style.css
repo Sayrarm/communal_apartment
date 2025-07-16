@@ -33,7 +33,7 @@ dialog::backdrop {
 }
 .tariffs-for-lastMonth,
 .tariffs-for-thisMonth {
-    padding: 2px;
+    padding: 5px;
     width: 100%;
     max-width: 100%;
 }

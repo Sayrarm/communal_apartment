@@ -56,7 +56,6 @@ function calculator () {
     const inputHotWaterCurrent = getInputValue('hot-current');
 
     const inputDebtLast = getInputValue('debt-last');
-    const inputDebtCurrent = getInputValue('debt-current');
 
     //подсчеты данных
     const electricCalculationT1 = (inputT1Current - inputT1Last) * tariffs.electro.t1;
@@ -75,9 +74,11 @@ function calculator () {
     const totalCalculation = totalElectricCalculation + totalWaterCalculation + tariffs.heating + tariffs.intercom + inputDebtLast;
 
     //выводим в интерфейс результат подсчета
+
+
     const total = document.createElement('div');
     total.className = 'result-item total';
-    total.textContent = `Всего к оплате: ${totalCalculation} руб.`;
+    total.textContent = `Всего к оплате: ${totalCalculation.toFixed(1)} руб.`;
     resultsContainer.appendChild(total);
 
     return total;
