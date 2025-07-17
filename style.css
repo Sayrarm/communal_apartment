@@ -5,6 +5,14 @@ body {
     text-transform: uppercase;
     background-color: #283747;
 }
+h1 {
+    text-align: center;
+    font-weight: 300;
+}
+h3 {
+    text-transform: uppercase;
+    font-weight: 300;
+}
 .container {
     background-color: #34495e;
     max-width: 800px;
@@ -36,18 +44,6 @@ dialog::backdrop {
     padding: 5px;
     width: 100%;
     max-width: 100%;
-}
-h1 {
-    text-align: center;
-    font-weight: 300;
-}
-h3 {
-    text-transform: uppercase;
-    font-weight: 300;
-}
-label {
-    text-transform: uppercase;
-    font-weight: 300;
 }
 .section {
     margin: 10px 0;
@@ -139,12 +135,6 @@ button:hover {
     font-size: 18px;
     border-top: 1px solid #d5d8dc;
 }
-.error {
-    color: red;
-    font-size: 14px;
-    margin-left: 10px;
-}
-
 @media (max-width: 825px) {
     .container {
         padding: 10px 0;
@@ -156,14 +146,12 @@ button:hover {
         position: static;
     }
 }
-
 @media (max-width: 752px) {
     input {
         width: 100px;
         max-width: 100%;
     }
 }
-
 @media (max-width: 615px) {
     .input-group {
         justify-content: center;

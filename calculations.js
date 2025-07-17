@@ -77,15 +77,15 @@ function calculator () {
 
     //выводим в интерфейс результат подсчета
     const electricCalc = addCalculationSection();
-    electricCalc.appendChild(addCalculationLine('Электроэнергия Т1', electricCalculationT1));
-    electricCalc.appendChild(addCalculationLine('Электроэнергия Т2', electricCalculationT2));
-    electricCalc.appendChild(addCalculationLine('Электроэнергия ИТОГ', totalElectricCalculation));
+    electricCalc.appendChild(addCalculationLine('Электроэнергия Т1', electricCalculationT1.toFixed(5)));
+    electricCalc.appendChild(addCalculationLine('Электроэнергия Т2', electricCalculationT2.toFixed(5)));
+    electricCalc.appendChild(addCalculationLine('Электроэнергия ИТОГ', totalElectricCalculation.toFixed(5)));
 
     const waterCalc = addCalculationSection()
-    waterCalc.appendChild(addCalculationLine('Холодная вода', coldWaterCalculation));
-    waterCalc.appendChild(addCalculationLine('Горячая вода', hotWaterCalculation));
-    waterCalc.appendChild(addCalculationLine('Водоотведение', disposalWaterCalculation));
-    waterCalc.appendChild(addCalculationLine('Водоснабжение ИТОГ', totalWaterCalculation));
+    waterCalc.appendChild(addCalculationLine('Холодная вода', coldWaterCalculation.toFixed(5)));
+    waterCalc.appendChild(addCalculationLine('Горячая вода', hotWaterCalculation.toFixed(5)));
+    waterCalc.appendChild(addCalculationLine('Водоотведение', disposalWaterCalculation.toFixed(5)));
+    waterCalc.appendChild(addCalculationLine('Водоснабжение ИТОГ', totalWaterCalculation.toFixed(5)));
 
     const heatingCalc = addCalculationSection();
     heatingCalc.appendChild(addCalculationLine('Отопление', tariffs.heating));
