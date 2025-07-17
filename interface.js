@@ -6,7 +6,7 @@ document.body.appendChild(container);
 //модальное окно с тарифами
 const modalTariffs = createModal('Действующие тарифы');
 modalTariffs.className = 'modal-container';
-modalTariffs.appendChild(createTariffsWindow('t1-tariff', 't2-tariff', 'cold-tariff', 'hot-tariff', 'disposal-tariff', undefined, 'heating-tariff', 'intercom-tariff'));
+modalTariffs.appendChild(createTariffsWindow('t1-tariff', 't2-tariff', 'cold-tariff', 'hot-tariff', 'disposal-tariff', undefined, 'heating-tariff', 'intercom-tariff', 'rent-tariff'));
 
 //кнопка для открытия модального окна с тарифами
 const tariffsModalWindowButton = createButton('Тарифы');
@@ -29,12 +29,12 @@ container.appendChild(containerWithInput);
 
 const tariffsForLastMonth = createSection('Прошлый месяц');
 tariffsForLastMonth.className = 'tariffs-for-lastMonth';
-tariffsForLastMonth.appendChild(createTariffsWindow('t1-last', 't2-last', 'cold-last', 'hot-last', undefined, 'debt-last', undefined, undefined));
+tariffsForLastMonth.appendChild(createTariffsWindow('t1-last', 't2-last', 'cold-last', 'hot-last', undefined, 'debt-last', undefined, undefined, undefined));
 containerWithInput.appendChild(tariffsForLastMonth);
 
 const tariffsForThisMonth = createSection('Текущий месяц');
 tariffsForThisMonth.className = 'tariffs-for-thisMonth';
-tariffsForThisMonth.appendChild(createTariffsWindow('t1-current', 't2-current', 'cold-current', 'hot-current', undefined, 'debt-current', 'heat-current', 'intercom-current'));
+tariffsForThisMonth.appendChild(createTariffsWindow('t1-current', 't2-current', 'cold-current', 'hot-current', undefined, 'debt-current', 'heat-current', 'intercom-current', 'rent-current'));
 containerWithInput.appendChild(tariffsForThisMonth);
 
 //кнопка для расчета

@@ -58,7 +58,7 @@ function createInput (labelText, id, type, defaultValue = '') {
 }
 
 //функция для создания ввода-граф для тарифов
-function createTariffsWindow (T1, T2, cold, hot, disposal, debt, heat, intercom) {
+function createTariffsWindow (T1, T2, cold, hot, disposal, debt, heat, intercom, rent) {
 
     const containerTariffs = document.createElement('div');
     containerTariffs.className = 'tariffs-container';
@@ -98,6 +98,13 @@ function createTariffsWindow (T1, T2, cold, hot, disposal, debt, heat, intercom)
         const intercomSystem = createSection('Домофон');
         intercomSystem.appendChild(createInput('Абон. плата:', intercom, 'number', tariffs.intercom));
         containerTariffs.appendChild(intercomSystem);
+    }
+
+    //Аренда квартиры
+    if (rent !== undefined) {
+        const rentApartment = createSection('Аренда за квартиру');
+        rentApartment.appendChild(createInput('Ежемес. платеж:', rent, 'number', tariffs.rent));
+        containerTariffs.appendChild(rentApartment);
     }
 
     return containerTariffs;

@@ -11,6 +11,7 @@ const tariffs = {
     },
     heating: 1878.19,
     intercom: 68.54,
+    rent: 55000,
     debt: 0
 };
 
@@ -22,6 +23,7 @@ parseFloat(document.getElementById('cold-tariff').value)
 parseFloat(document.getElementById('disposal-tariff').value)
 parseFloat(document.getElementById('heating-tariff').value)
 parseFloat(document.getElementById('intercom-tariff').value)
+parseFloat(document.getElementById('rent-tariff').value)
 */
 
 //функция для получения данных из ввода
@@ -60,6 +62,8 @@ function calculator () {
 
     const inputDebtLast = getInputValue('debt-last');
 
+    const inputRentCurrent = getInputValue('rent-current');
+
     //подсчеты данных
     const electricCalculationT1 = (inputT1Current - inputT1Last) * tariffs.electro.t1;
     const electricCalculationT2 = (inputT2Current - inputT2Last) * tariffs.electro.t2;
@@ -74,6 +78,7 @@ function calculator () {
     const totalWaterCalculation = coldWaterCalculation + hotWaterCalculation + disposalWaterCalculation;
 
     const totalCalculation = totalElectricCalculation + totalWaterCalculation + tariffs.heating + tariffs.intercom + inputDebtLast;
+    const totalCalculationWithRent = totalCalculation + inputRentCurrent;
 
     //выводим в интерфейс результат подсчета
     const electricCalc = addCalculationSection();
@@ -101,6 +106,7 @@ function calculator () {
     resultsContainer.appendChild(total);
 
     total.appendChild(addCalculationLine('Всего к оплате', totalCalculation.toFixed(1)));
+    total.appendChild(addCalculationLine('Вместе с арендой', totalCalculationWithRent.toFixed(1)));
 
     //показ контейнера с результатами расчета
     resultSection.style.display = 'flex';
