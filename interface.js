@@ -19,7 +19,7 @@ document.getElementById("tariffs-Modal-Window-Button").onclick = () => {
 //название приложения
 const title = document.createElement('h1');
 title.className = 'title';
-title.textContent = 'Калькулятор коммунальных платежей';
+title.textContent = 'Калькулятор коммуналки';
 container.appendChild(title);
 
 //строки для ввода данных для расчета:
