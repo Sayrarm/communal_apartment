@@ -50,7 +50,7 @@ label {
     font-weight: 300;
 }
 .section {
-    margin-bottom: 15px;
+    margin: 10px 0;
     padding: 5px;
     border: 1px solid #d5d8dc;
     border-radius: 5px;
@@ -93,7 +93,7 @@ button {
     padding: 10px 15px;
     border-radius: 4px;
     cursor: pointer;
-    margin: 5px;
+    margin: 0 5px;
 }
 button:hover {
     background-color: #aeb6bf;
@@ -102,7 +102,7 @@ button:hover {
 #tariffs-Modal-Window-Button {
     position: absolute;
     right: 2px;
-    top: 17px;
+    top: 23px;
 }
 .button-section {
     display: flex;
@@ -147,7 +147,7 @@ button:hover {
 
 @media (max-width: 825px) {
     .container {
-        padding: 0;
+        padding: 10px 0;
     }
     .input-group {
         flex-wrap: wrap;
@@ -169,7 +169,6 @@ button:hover {
         justify-content: center;
         flex-direction: column;
     }
-
     .result {
         max-width: 330px;
         width: 100%;
