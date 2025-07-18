@@ -15,16 +15,63 @@ const tariffs = {
     debt: 0
 };
 
-/*
-parseFloat(document.getElementById('t1-tariff').value)
-parseFloat(document.getElementById('t2-tariff').value)
-parseFloat(document.getElementById('hot-tariff').value)
-parseFloat(document.getElementById('cold-tariff').value)
-parseFloat(document.getElementById('disposal-tariff').value)
-parseFloat(document.getElementById('heating-tariff').value)
-parseFloat(document.getElementById('intercom-tariff').value)
-parseFloat(document.getElementById('rent-tariff').value)
-*/
+
+//LOCALSTORAGE
+
+// Функция для сохранения данных
+function saveToLocalStorage() {
+    // 1. Создаём массив tariffIDs, в котором хранятся ID всех полей ввода
+    const tariffIDs = [
+        't1-tariff', 't2-tariff', 'cold-tariff',
+        'hot-tariff', 'disposal-tariff', 'heating-tariff',
+        'intercom-tariff', 'rent-tariff'
+    ];
+
+    // 2. Перебираем каждый ID из массива tariffIDs
+    tariffIDs.forEach(id => {
+        // 3. Для каждого ID:
+        //    - getInputValue(id) получает числовое значение из поля ввода
+        //    - .toString() преобразует число в строку (localStorage хранит только строки)
+        //    - localStorage.setItem(id, ...) сохраняет значение под ключом = ID поля
+        localStorage.setItem(id, getInputValue(id).toString());
+    });
+}
+
+//функция для загрузки данных
+function loadFromLocalStorage() {
+    // 1. Создаём массив tariffIDs
+    const tariffIDs = [
+        't1-tariff', 't2-tariff', 'cold-tariff',
+        'hot-tariff', 'disposal-tariff', 'heating-tariff',
+        'intercom-tariff', 'rent-tariff'
+    ];
+
+    // 2. Перебираем каждый ID из массива tariffIDs
+    tariffIDs.forEach(id => {
+        // 3. Пытаемся получить сохранённое значение из localStorage
+        const savedValue = localStorage.getItem(id);
+        // 4. Если значение найдено (не null)
+        if (savedValue !== null) {
+            // 5. Находим поле ввода на странице по ID
+            const element = document.getElementById(id);
+            // 6. Если поле существует, вставляем в него сохранённое значение
+            if (element) {
+                element.value = savedValue;
+            }
+        }
+    });
+}
+
+//загружаем сохраненные в модальном окне тарифы
+window.addEventListener('load', loadFromLocalStorage);
+
+// 1. Функция для получения тарифа из localStorage или значения по умолчанию
+function getSavedTariff(tariffKey, defaultValue) {
+    const savedValue = localStorage.getItem(tariffKey);
+    // Если значение есть в localStorage - возвращаем его (преобразуя в число)
+    // Если нет - возвращаем значение по умолчанию
+    return savedValue !== null ? parseFloat(savedValue) : defaultValue;
+}
 
 //функция для получения данных из ввода
 function getInputValue(id) {
@@ -65,19 +112,19 @@ function calculator () {
     const inputRentCurrent = getInputValue('rent-current');
 
     //подсчеты данных
-    const electricCalculationT1 = (inputT1Current - inputT1Last) * tariffs.electro.t1;
-    const electricCalculationT2 = (inputT2Current - inputT2Last) * tariffs.electro.t2;
+    const electricCalculationT1 = (inputT1Current - inputT1Last) * getSavedTariff('t1-tariff', tariffs.electro.t1);
+    const electricCalculationT2 = (inputT2Current - inputT2Last) * getSavedTariff('t2-tariff', tariffs.electro.t2);
 
     const totalElectricCalculation = electricCalculationT1 + electricCalculationT2;
 
     const coldWater = (inputColdWaterCurrent - inputColdWaterLast);
-    const coldWaterCalculation = coldWater * tariffs.water.cold;
+    const coldWaterCalculation = coldWater * getSavedTariff('cold-tariff', tariffs.water.cold);
     const hotWater = (inputHotWaterCurrent - inputHotWaterLast);
-    const hotWaterCalculation = hotWater * tariffs.water.hot;
-    const disposalWaterCalculation = (coldWater + hotWater) * tariffs.water.disposal;
+    const hotWaterCalculation = hotWater * getSavedTariff('hot-tariff', tariffs.water.hot);
+    const disposalWaterCalculation = (coldWater + hotWater) * getSavedTariff('disposal-tariff', tariffs.water.disposal);
     const totalWaterCalculation = coldWaterCalculation + hotWaterCalculation + disposalWaterCalculation;
 
-    const totalCalculation = totalElectricCalculation + totalWaterCalculation + tariffs.heating + tariffs.intercom + inputDebtLast;
+    const totalCalculation = totalElectricCalculation + totalWaterCalculation + getSavedTariff('heating-tariff', tariffs.heating) + getSavedTariff('intercom-tariff', tariffs.intercom) + inputDebtLast;
     const totalCalculationWithRent = totalCalculation + inputRentCurrent;
 
     //выводим в интерфейс результат подсчета
@@ -93,10 +140,10 @@ function calculator () {
     waterCalc.appendChild(addCalculationLine('Водоснабжение ИТОГ', totalWaterCalculation.toFixed(2)));
 
     const heatingCalc = addCalculationSection();
-    heatingCalc.appendChild(addCalculationLine('Отопление', tariffs.heating));
+    heatingCalc.appendChild(addCalculationLine('Отопление', getSavedTariff('heating-tariff', tariffs.heating)));
 
     const intercomCalc = addCalculationSection();
-    intercomCalc.appendChild(addCalculationLine('Домофон', tariffs.intercom));
+    intercomCalc.appendChild(addCalculationLine('Домофон', getSavedTariff('intercom-tariff', tariffs.intercom)));
 
     const debtCalc = addCalculationSection();
     debtCalc.appendChild(addCalculationLine('Долг за прошлый месяц', inputDebtLast));

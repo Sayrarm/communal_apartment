@@ -136,12 +136,23 @@ function createModal (modalText) {
     buttonSection.className = 'button-section';
     modal.appendChild(buttonSection);
 
+    const message = document.createElement('div');
+    message.className = 'message';
+    message.textContent = 'Данные сохранены';
+    message.style.display = 'none';
+    modal.appendChild(message);
+
     const saveButton = createButton('Сохранить');
+    saveButton.onclick = () => {
+        saveToLocalStorage();
+        message.style.display = 'flex';
+    }
     buttonSection.appendChild(saveButton);
 
     const closeButton = createButton('Закрыть');
     closeButton.id = 'close-button'
     closeButton.onclick = () => {
+        message.style.display = 'none';
         modal.close();
         enableScroll();
     }
