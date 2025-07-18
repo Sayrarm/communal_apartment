@@ -141,7 +141,7 @@ function createModal (modalText) {
 
     const closeButton = createButton('Закрыть');
     closeButton.id = 'close-button'
-    document.getElementById('close-button').onclick = () => {
+    closeButton.onclick = () => {
         modal.close();
         enableScroll();
     }

@@ -11,7 +11,7 @@ modalTariffs.appendChild(createTariffsWindow('t1-tariff', 't2-tariff', 'cold-tar
 //кнопка для открытия модального окна с тарифами
 const tariffsModalWindowButton = createButton('Тарифы');
 tariffsModalWindowButton.id = 'tariffs-Modal-Window-Button';
-document.getElementById("tariffs-Modal-Window-Button").onclick = () => {
+tariffsModalWindowButton.onclick = () => {
     modalTariffs.showModal();
     disableScroll();
 };
@@ -40,7 +40,7 @@ containerWithInput.appendChild(tariffsForThisMonth);
 //кнопка для расчета
 const calculateButton = createButton('Рассчитать');
 calculateButton.id = 'calculate-button';
-document.getElementById('calculate-button').onclick = () => calculator();
+calculateButton.onclick = () => calculator();
 
 //контейнер с результатами расчета
 const resultSection = document.createElement('div');
