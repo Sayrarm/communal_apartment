@@ -39,7 +39,7 @@ function addCalculationLine (name, value) {
 }
 
 //функция для создания графы для подсчета
-function createInput (labelText, id, type, defaultValue = '') {
+function createInput (labelText, id, type, defaultValue) {
     const group = document.createElement('div');
     group.className = 'input-group';
 
@@ -75,14 +75,14 @@ function createTariffsWindow (T1, T2, cold, hot, disposal, debt, heat, intercom,
     waterSupply.appendChild(createInput('Горячая вода (м3):', hot, 'number'));
 
     if (disposal !== undefined) {
-        waterSupply.appendChild(createInput('Водоотведение (м3):', disposal, 'number'));
+        waterSupply.appendChild(createInput('Водоотведение (м3):', disposal, 'number', tariffs.water.disposal));
     }
     containerTariffs.appendChild(waterSupply);
 
     //долг (добавляем, только если debt !== undefined)
     if (debt !== undefined) {
         const debtSection = createSection('Долг');
-        debtSection.appendChild(createInput('Долг:', debt, 'number'));
+        debtSection.appendChild(createInput('Долг:', debt, 'number', tariffs.debt));
         containerTariffs.appendChild(debtSection);
     }
 

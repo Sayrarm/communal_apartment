@@ -109,7 +109,7 @@ function calculator () {
 
     const inputDebtLast = getInputValue('debt-last');
 
-    const inputRentCurrent = getInputValue('rent-current');
+    const inputRentCurrent = getSavedTariff('rent-tariff', tariffs.rent);
 
     //подсчеты данных
     const electricCalculationT1 = (inputT1Current - inputT1Last) * getSavedTariff('t1-tariff', tariffs.electro.t1);
