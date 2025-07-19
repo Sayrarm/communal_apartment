@@ -144,6 +144,7 @@ function createModal (modalText) {
 
     const saveButton = createButton('Сохранить');
     saveButton.onclick = () => {
+        inputTariffs();
         saveToLocalStorage();
         message.style.display = 'flex';
     }
@@ -169,4 +170,29 @@ function disableScroll() {
 // Функция для разрешения скролла
 function enableScroll() {
     document.body.style.overflow = '';
+}
+
+function inputTariffs() {
+    const tariffInputs = {
+        t1: document.getElementById('t1-tariff'),
+        t2: document.getElementById('t2-tariff'),
+        cold: document.getElementById('cold-tariff'),
+        hot: document.getElementById('hot-tariff'),
+        disposal: document.getElementById('disposal-tariff'),
+        heating: document.getElementById('heating-tariff'),
+        intercom: document.getElementById('intercom-tariff'),
+        rent: document.getElementById('rent-tariff'),
+    };
+
+    // Если поле пустое ('' или undefined), подставляем значение из `tariffs`
+    if (!tariffInputs.t1?.value) tariffInputs.t1.value = tariffs.electro.t1;
+    if (!tariffInputs.t2?.value) tariffInputs.t2.value = tariffs.electro.t2;
+    if (!tariffInputs.cold?.value) tariffInputs.cold.value = tariffs.water.cold;
+    if (!tariffInputs.hot?.value) tariffInputs.hot.value = tariffs.water.hot;
+    if (!tariffInputs.disposal?.value) tariffInputs.disposal.value = tariffs.water.disposal;
+    if (!tariffInputs.heating?.value) tariffInputs.heating.value = tariffs.heating;
+    if (!tariffInputs.intercom?.value) tariffInputs.intercom.value = tariffs.intercom;
+    if (!tariffInputs.rent?.value) tariffInputs.rent.value = tariffs.rent;
+
+    return tariffInputs;
 }
