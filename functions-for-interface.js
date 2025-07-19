@@ -50,6 +50,9 @@ function createInput (labelText, id, type, defaultValue) {
 
     const input = document.createElement('input');
     input.type = type;
+    input.autocomplete = 'transaction-amount';
+    input.name = 'amount';
+    input.title = 'Введите значение';
     input.id = id;
     input.value = defaultValue;
     group.appendChild(input);
@@ -144,8 +147,8 @@ function createModal (modalText) {
 
     const saveButton = createButton('Сохранить');
     saveButton.onclick = () => {
-        inputTariffs();
-        saveToLocalStorage();
+        inputTariffs(); //подставляем значения по умолчанию, если тарифы не введены (0 - считается введенным тарифом)
+        saveToLocalStorage(); //сохраняем в localstorage
         message.style.display = 'flex';
     }
     buttonSection.appendChild(saveButton);
@@ -172,6 +175,8 @@ function enableScroll() {
     document.body.style.overflow = '';
 }
 
+/*функция для модального окна "Тарифы": в случае отсутствия значений в input-поле подставляются
+тарифы по умолчанию после нажатия кнопки "Сохранить"*/
 function inputTariffs() {
     const tariffInputs = {
         t1: document.getElementById('t1-tariff'),
