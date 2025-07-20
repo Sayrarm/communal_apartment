@@ -1,79 +1,172 @@
 body {
-    font-family: Arial, sans-serif;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f5f5f5;
-}
-.container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-family: TikTok Sans, monospace;
+    font-size: 14px;
+    color: white;
+    text-transform: uppercase;
+    background-color: #283747;
 }
 h1 {
-    color: #2c3e50;
     text-align: center;
+    font-weight: 300;
+}
+h3 {
+    text-transform: uppercase;
+    font-weight: 300;
+}
+.container {
+    background-color: #34495e;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 0 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.modal-container {
+    background-color: #283747;
+    color: white;
+    border-radius: 8px;
+    border-color: transparent;
+}
+.message {
+    justify-content: center;
+    padding-top: 5px;
+}
+.message::before {
+    content: "✓";
+    margin-right: 8px;
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px); /* Уровень размытия */
+}
+.container-with-input {
+    display: flex;
+}
+.tariffs-for-lastMonth,
+.tariffs-for-thisMonth {
+    padding: 5px;
+    width: 100%;
+    max-width: 100%;
 }
 .section {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
+    margin: 10px 0;
+    padding: 5px;
+    border: 1px solid #d5d8dc;
     border-radius: 5px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 .section-title {
+    color: #5499c7;
+    font-size: 18px;
+    font-weight: 300;
     margin-top: 0;
-    color: #3498db;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
 }
 .input-group {
     margin-bottom: 10px;
     display: flex;
+    gap: 5px;
+    justify-content: flex-end;
     align-items: center;
 }
-label {
-    width: 200px;
-    margin-right: 10px;
-}
 input {
-    padding: 8px;
-    border: 1px solid #ddd;
+    padding: 5px;
+    width: 100px;
+    border: 1px solid #d5d8dc;
     border-radius: 4px;
-    flex: 1;
+    background-color: #283747;
+    color: white;
+    font-size: 16px;
+}
+/* Убирает стрелочки в Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 button {
-    background-color: #3498db;
+    background-color: #5499c7;
     color: white;
+    font-size: 16px;
+    text-transform: uppercase;
     border: none;
-    padding: 10px 15px;
+    padding: 10px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
-    display: block;
-    margin: 20px auto;
+    margin: 0 5px;
+    transition: all 0.3s ease;
 }
 button:hover {
-    background-color: #2980b9;
+    background-color: white;
+    color: #5499c7;
+}
+.container-buttons {
+    align-self: flex-end;
+    padding: 10px 0 0 5px;
+}
+.button-section {
+    display: flex;
+    justify-content: center;
+    margin: 2px;
 }
 .result {
+    text-transform: uppercase;
+    font-weight: 300;
     margin-top: 20px;
     padding: 15px;
-    background-color: #f8f9fa;
+    background-color: #283747;
     border-radius: 5px;
+    flex-direction: column;
+    align-items: center;
+    max-width: 562px;
+    width: 100%;
+}
+.results-container {
+    max-width: 100%;
+    width: 100%;
+}
+.calc-section {
+    border-top: 1px solid #d5d8dc;
+    padding: 5px 0;
 }
 .result-item {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
+    padding: 3px 0;
 }
-.total {
-    font-weight: bold;
+.result-item-total {
+    padding: 15px 0 0 0;
+    font-weight: 600;
     font-size: 18px;
-    border-top: 1px solid #ddd;
-    padding-top: 10px;
-    margin-top: 10px;
+    border-top: 1px solid #d5d8dc;
 }
-.error {
-    color: red;
-    font-size: 14px;
-    margin-left: 10px;
+@media (max-width: 825px) {
+    .input-group {
+        flex-wrap: wrap;
+    }
+}
+@media (max-width: 752px) {
+    input {
+        width: 100px;
+        max-width: 100%;
+    }
+}
+@media (max-width: 615px) {
+    .input-group {
+        justify-content: center;
+        flex-direction: column;
+    }
+    .result {
+        max-width: 330px;
+        width: 100%;
+    }
 }
