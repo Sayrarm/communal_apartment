@@ -3,6 +3,11 @@ const container = document.createElement('div');
 container.className = 'container';
 document.body.appendChild(container);
 
+//контейнер для кнопок
+const containerButtons = document.createElement('div');
+containerButtons.className = 'container-buttons';
+container.appendChild(containerButtons);
+
 //модальное окно с тарифами
 const modalTariffs = createModal('Действующие тарифы');
 modalTariffs.className = 'modal-container';
@@ -19,12 +24,25 @@ modalTariffs.appendChild(createTariffsWindow(
 ));
 
 //кнопка для открытия модального окна с тарифами
-const tariffsModalWindowButton = createButton('Тарифы');
-tariffsModalWindowButton.id = 'tariffs-Modal-Window-Button';
-tariffsModalWindowButton.onclick = () => {
+const modalTariffsButton = createButton('Тарифы');
+modalTariffsButton.id = 'modal-tariffs-button';
+modalTariffsButton.onclick = () => {
     modalTariffs.showModal();
     disableScroll();
 };
+containerButtons.appendChild(modalTariffsButton);
+
+//модальное окно с историей расчетов
+const modalHistory = createModal('История расчетов');
+modalHistory.className = 'modal-container';
+
+const modalHistoryButton = createButton('История');
+modalHistoryButton.id = 'modal-history-button';
+modalHistoryButton.onclick = () => {
+    modalHistory.showModal();
+    disableScroll();
+};
+containerButtons.appendChild(modalHistoryButton);
 
 //название приложения
 const title = document.createElement('h1');
