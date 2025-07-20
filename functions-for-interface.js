@@ -50,8 +50,8 @@ function createInput (labelText, id, type, defaultValue) {
 
     const input = document.createElement('input');
     input.type = type;
-    input.autocomplete = 'transaction-amount';
-    input.name = 'amount';
+    input.autocomplete = 'on';
+    input.name = 'product-quantity';
     input.title = 'Введите значение';
     input.id = id;
     input.value = defaultValue;

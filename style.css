@@ -88,6 +88,12 @@ input {
     color: white;
     font-size: 16px;
 }
+/* Убирает стрелочки в Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 button {
     background-color: #d5d8dc;
     color: #283747;
