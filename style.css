@@ -13,6 +13,12 @@ h3 {
     text-transform: uppercase;
     font-weight: 300;
 }
+table, tbody, tr, th, td {
+    margin: 5px;
+    padding: 2px;
+    border: 1px solid #d5d8dc;
+    border-collapse: collapse;
+}
 .container {
     background-color: #34495e;
     max-width: 800px;

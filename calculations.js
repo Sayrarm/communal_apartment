@@ -133,7 +133,7 @@ function calculator () {
     electricCalc.appendChild(addCalculationLine('Электроэнергия Т2', electricCalculationT2.toFixed(2)));
     electricCalc.appendChild(addCalculationLine('Электроэнергия ИТОГ', totalElectricCalculation.toFixed(2)));
 
-    const waterCalc = addCalculationSection()
+    const waterCalc = addCalculationSection();
     waterCalc.appendChild(addCalculationLine('Холодная вода', coldWaterCalculation.toFixed(2)));
     waterCalc.appendChild(addCalculationLine('Горячая вода', hotWaterCalculation.toFixed(2)));
     waterCalc.appendChild(addCalculationLine('Водоотведение', disposalWaterCalculation.toFixed(2)));
@@ -155,7 +155,47 @@ function calculator () {
     total.appendChild(addCalculationLine('Всего к оплате', totalCalculation.toFixed(1)));
     total.appendChild(addCalculationLine('Вместе с арендой', totalCalculationWithRent.toFixed(1)));
 
+    function localStorageHistory() {
+        //сохраняем рез-ты расчета в localstorage
+        const inputConst = [
+            electricCalculationT1,
+            electricCalculationT2,
+            totalElectricCalculation,
+            coldWaterCalculation,
+            hotWaterCalculation,
+            disposalWaterCalculation,
+            totalWaterCalculation,
+            totalCalculation,
+            totalCalculationWithRent
+        ];
+
+        // 2. Перебираем каждый ID из массива tariffIDs
+        inputConst.forEach(id => {
+            // 3. Для каждого ID:
+            //    - getInputValue(id) получает числовое значение из поля ввода
+            //    - .toString() преобразует число в строку (localStorage хранит только строки)
+            //    - localStorage.setItem(id, ...) сохраняет значение под ключом = ID поля
+            localStorage.setItem(id.toString(), getInputValue(id).toString());
+        });
+
+        // 2. Перебираем каждый ID из массива tariffIDs
+        inputConst.forEach(id => {
+            // 3. Пытаемся получить сохранённое значение из localStorage
+            const savedValue = localStorage.getItem(id.toString());
+            // 4. Если значение найдено (не null)
+            if (savedValue !== null) {
+                // 5. Находим поле ввода на странице по ID
+                const element = document.getElementById(id.toString());
+                // 6. Если поле существует, вставляем в него сохранённое значение
+                if (element) {
+                    element.value = savedValue;
+                }
+            }
+        });
+    }
+
+    window.addEventListener('load', localStorageHistory);
+
     //показ контейнера с результатами расчета
     resultSection.style.display = 'flex';
-    return total;
 }

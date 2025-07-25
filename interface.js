@@ -35,6 +35,7 @@ containerButtons.appendChild(modalTariffsButton);
 //модальное окно с историей расчетов
 const modalHistory = createModal('История расчетов');
 modalHistory.className = 'modal-container';
+modalHistory.appendChild(createTableHistory());
 
 const modalHistoryButton = createButton('История');
 modalHistoryButton.id = 'modal-history-button';
@@ -51,7 +52,8 @@ title.textContent = 'Калькулятор коммуналки';
 container.appendChild(title);
 
 //строки для ввода данных для расчета:
-const containerWithInput = createSection('');
+const containerWithInput = document.createElement('form');
+containerWithInput.autocomplete = 'on';
 containerWithInput.className = 'container-with-input';
 container.appendChild(containerWithInput);
 
@@ -94,6 +96,7 @@ calculateButton.onclick = () => calculator();
 const resultSection = document.createElement('div');
 resultSection.className = 'result';
 resultSection.style.display = 'none';
+container.appendChild(resultSection);
 
 const resultTitle = document.createElement('h3');
 resultTitle.textContent = 'Результаты расчета';
@@ -103,5 +106,4 @@ const resultsContainer = document.createElement('div');
 resultsContainer.className = 'results-container';
 resultSection.appendChild(resultsContainer);
 
-container.appendChild(resultSection);
 

@@ -50,8 +50,6 @@ function createInput (labelText, id, type, defaultValue) {
 
     const input = document.createElement('input');
     input.type = type;
-    input.autocomplete = 'on';
-    input.name = 'product-quantity';
     input.title = 'Введите значение';
     input.id = id;
     input.value = defaultValue;
@@ -175,8 +173,10 @@ function enableScroll() {
     document.body.style.overflow = '';
 }
 
-/*функция для модального окна "Тарифы": в случае отсутствия значений в input-поле подставляются
-тарифы по умолчанию после нажатия кнопки "Сохранить"*/
+/*
+функция для модального окна "Тарифы": в случае отсутствия значений в input-поле подставляются
+тарифы по умолчанию после нажатия кнопки "Сохранить"
+*/
 function inputTariffs() {
     const tariffInputs = {
         t1: document.getElementById('t1-tariff'),
@@ -200,4 +200,68 @@ function inputTariffs() {
     if (!tariffInputs.rent?.value) tariffInputs.rent.value = tariffs.rent;
 
     return tariffInputs;
+}
+
+function createTableParts(tag, titleName) {
+    const thData = document.createElement(tag);
+    thData.textContent = titleName;
+
+    return thData;
+}
+
+function createTableHistory() {
+
+    const tableHistory = document.createElement('table');
+    modalHistory.appendChild(tableHistory);
+
+    const theadTableHistory = document.createElement('thead');
+    tableHistory.appendChild(theadTableHistory);
+
+    const trTheadTableHistory = document.createElement('tr');
+    theadTableHistory.appendChild(trTheadTableHistory);
+
+    trTheadTableHistory.appendChild(createTableParts('th', 'Дата'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Т1'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Т2'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Хол.вода'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Гор.вода'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Водоотведение'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Отопление'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Домофон'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Т1 итог'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Т2 итог'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Электроэнергия итог'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Хол.вода итог'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Гор.вода итог'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Водоотведение итог'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Вода итог'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Всего'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Всего с арендой'));
+
+    const tbodyHistory = document.createElement('tbody');
+    tableHistory.appendChild(tbodyHistory);
+
+    const trTbodyTableHistory = document.createElement('tr');
+    tbodyHistory.appendChild(trTbodyTableHistory);
+
+    trTbodyTableHistory.appendChild(createTableParts('td', '1'));
+    trTbodyTableHistory.appendChild(createTableParts('td', '2'));
+    trTbodyTableHistory.appendChild(createTableParts('td', '3'));
+    trTbodyTableHistory.appendChild(createTableParts('td', '4'));
+    trTbodyTableHistory.appendChild(createTableParts('td', '5'));
+    trTbodyTableHistory.appendChild(createTableParts('td', '6'));
+    trTbodyTableHistory.appendChild(createTableParts('td', '7'));
+    trTbodyTableHistory.appendChild(createTableParts('td', '8'));
+    trTbodyTableHistory.appendChild(createTableParts('td', '9'));
+    trTbodyTableHistory.appendChild(createTableParts('td', '10'));
+    trTbodyTableHistory.appendChild(createTableParts('td', '11'));
+    trTbodyTableHistory.appendChild(createTableParts('td', '12'));
+    trTbodyTableHistory.appendChild(createTableParts('td', '13'));
+    trTbodyTableHistory.appendChild(createTableParts('td', '14'));
+    trTbodyTableHistory.appendChild(createTableParts('td', '15'));
+    trTbodyTableHistory.appendChild(createTableParts('td', '16'));
+    trTbodyTableHistory.appendChild(createTableParts('td', '17'));
+
+
+    return tableHistory;
 }
