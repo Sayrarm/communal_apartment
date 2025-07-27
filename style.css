@@ -45,7 +45,10 @@ table, tbody, tr, th, td {
     content: "✓";
     margin-right: 8px;
 }
-
+.message-without-table {
+    justify-content: center;
+    padding-top: 10px;
+}
 dialog::backdrop {
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px); /* Уровень размытия */
@@ -93,7 +96,7 @@ input {
     color: white;
     font-size: 16px;
 }
-/* Убирает стрелочки в Chrome, Safari, Edge, Opera */
+/* Убирает стрелочки в input для Chrome, Safari, Edge, Opera */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;

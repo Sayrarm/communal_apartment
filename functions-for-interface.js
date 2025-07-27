@@ -11,7 +11,7 @@ function createSection (titleText) {
     return section;
 }
 
-//функция для создания секции расчетов
+//функция для создания секции расчетов (разделяются полосками для красивости)
 function addCalculationSection () {
     const totalSection = document.createElement('div');
     totalSection.className = 'calc-section';
@@ -38,7 +38,7 @@ function addCalculationLine (name, value) {
     return line;
 }
 
-//функция для создания графы для подсчета
+//функция для создания input-строки
 function createInput (labelText, id, type, defaultValue) {
     const group = document.createElement('div');
     group.className = 'input-group';
@@ -58,7 +58,7 @@ function createInput (labelText, id, type, defaultValue) {
     return group;
 }
 
-//функция для создания ввода-граф для тарифов
+//функция для создания input-ввода для тарифов и данных пользователя
 function createTariffsWindow (T1, T2, cold, hot, disposal, debt, heat, intercom, rent) {
 
     const containerTariffs = document.createElement('div');
@@ -163,12 +163,12 @@ function createModal (modalText) {
     return modal;
 }
 
-// Функция для запрета скролла
+// Функция для запрета прокрутки страницы
 function disableScroll() {
     document.body.style.overflow = 'hidden';
 }
 
-// Функция для разрешения скролла
+// Функция для разрешения прокрутки страницы
 function enableScroll() {
     document.body.style.overflow = '';
 }
@@ -189,7 +189,7 @@ function inputTariffs() {
         rent: document.getElementById('rent-tariff'),
     };
 
-    // Если поле пустое ('' или undefined), подставляем значение из `tariffs`
+    // Если поле пустое '' или undefined, подставляем значение из переменной `tariffs`
     if (!tariffInputs.t1?.value) tariffInputs.t1.value = tariffs.electro.t1;
     if (!tariffInputs.t2?.value) tariffInputs.t2.value = tariffs.electro.t2;
     if (!tariffInputs.cold?.value) tariffInputs.cold.value = tariffs.water.cold;
@@ -202,6 +202,7 @@ function inputTariffs() {
     return tariffInputs;
 }
 
+//создаем части таблицы
 function createTableParts(tag, titleName) {
     const thData = document.createElement(tag);
     thData.textContent = titleName;
@@ -215,13 +216,16 @@ function createTableHistory() {
     // 1. Очищаем контейнер перед добавлением новых результатов
     modalHistoryWithoutButtons.textContent = '';
 
-    // Получаем историю из localStorage
+    // Получаем историю из localStorage (если истории нет, то возвращаем пустой массив)
     calculationHistory = JSON.parse(localStorage.getItem('calculationHistory')) || [];
 
     // Если история пуста, создаем и возвращаем элемент с сообщением
     if (calculationHistory.length === 0) {
-        const emptyMessage = document.createElement('p');
+        const emptyMessage = document.createElement('div');
+        emptyMessage.className = 'message-without-table';
         emptyMessage.textContent = 'История расчетов пуста';
+        emptyMessage.style.display = 'flex';
+        modalHistoryWithoutButtons.appendChild(emptyMessage);
         return emptyMessage;
     }
 
@@ -232,6 +236,7 @@ function createTableHistory() {
     const theadTableHistory = document.createElement('thead');
     tableHistory.appendChild(theadTableHistory);
 
+    //создаем блок для заголовков
     const trTheadTableHistory = document.createElement('tr');
     theadTableHistory.appendChild(trTheadTableHistory);
 
@@ -258,12 +263,12 @@ function createTableHistory() {
     const tbodyHistory = document.createElement('tbody');
     tableHistory.appendChild(tbodyHistory);
 
-    // Добавляем данные
+    // Добавляем данные из localstorage
     calculationHistory.forEach(calculationEntry => {
         const trTbodyTableHistory = document.createElement('tr');
         tbodyHistory.appendChild(trTbodyTableHistory);
 
-        // Добавляем все ячейки как было
+        // Добавляем все ячейки
         trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.date));
         trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.inputs.t1Current));
         trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.inputs.t2Current));

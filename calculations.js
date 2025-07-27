@@ -23,7 +23,7 @@ const calcData = {
 
 //LOCALSTORAGE для тарифов
 
-// Функция для сохранения данных
+// Функция для сохранения тарифов
 function saveToLocalStorageTariffs() {
     // 1. Создаём массив tariffIDs, в котором хранятся ID всех полей ввода
     const tariffIDs = [
@@ -89,12 +89,13 @@ function getSavedTariff(tariffKey, defaultValue) {
 }
 
 //LOCALSTORAGE для истории расчетов
+
 // Глобальная переменная для хранения истории расчетов
 let calculationHistory = [];
 
 // Функция для сохранения текущего расчета в историю
 function saveCalculationToHistory() {
-    // Получаем текущую дату
+    // Получаем текущую дату, когда мы производим расчет и сохраняем в localstorage инфо
     const currentDate = new Date().toLocaleDateString();
 
     // Создаем объект с данными для сохранения
@@ -136,7 +137,7 @@ function saveCalculationToHistory() {
     calculationHistory = history;
 }
 
-//функция для получения данных из ввода
+//функция для получения данных из input-ввода
 function getInputValue(id) {
     const element = document.getElementById(id);
 
@@ -175,11 +176,14 @@ function calculator () {
     calcData.inputs.inputRentCurrent = getSavedTariff('rent-tariff', tariffs.rent);
 
 //подсчеты данных
+
+    //считаем электроэнергию
     calcData.results.electricCalculationT1 = (calcData.inputs.inputT1Current - calcData.inputs.inputT1Last) * getSavedTariff('t1-tariff', tariffs.electro.t1);
     calcData.results.electricCalculationT2 = (calcData.inputs.inputT2Current - calcData.inputs.inputT2Last) * getSavedTariff('t2-tariff', tariffs.electro.t2);
 
     calcData.results.totalElectricCalculation = calcData.results.electricCalculationT1 + calcData.results.electricCalculationT2;
 
+    //считаем водоснабжение
     calcData.results.coldWater = (calcData.inputs.inputColdWaterCurrent - calcData.inputs.inputColdWaterLast);
     calcData.results.coldWaterCalculation = calcData.results.coldWater * getSavedTariff('cold-tariff', tariffs.water.cold);
     calcData.results.hotWater = (calcData.inputs.inputHotWaterCurrent - calcData.inputs.inputHotWaterLast);
@@ -187,6 +191,7 @@ function calculator () {
     calcData.results.disposalWaterCalculation = (calcData.results.coldWater + calcData.results.hotWater) * getSavedTariff('disposal-tariff', tariffs.water.disposal);
     calcData.results.totalWaterCalculation = calcData.results.coldWaterCalculation + calcData.results.hotWaterCalculation + calcData.results.disposalWaterCalculation;
 
+    //считаем итого (электроэнергия + вода + отопление + домофон) + итого с арендой жилья
     calcData.results.totalCalculation = calcData.results.totalElectricCalculation + calcData.results.totalWaterCalculation + getSavedTariff('heating-tariff', tariffs.heating) + getSavedTariff('intercom-tariff', tariffs.intercom) + calcData.inputs.inputDebtLast;
     calcData.results.totalCalculationWithRent = calcData.results.totalCalculation + calcData.inputs.inputRentCurrent;
 

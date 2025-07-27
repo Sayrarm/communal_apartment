@@ -3,7 +3,7 @@ const container = document.createElement('div');
 container.className = 'container';
 document.body.appendChild(container);
 
-//контейнер для кнопок
+//контейнер для верхних кнопок
 const containerButtons = document.createElement('div');
 containerButtons.className = 'container-buttons';
 container.appendChild(containerButtons);
@@ -36,9 +36,14 @@ containerButtons.appendChild(modalTariffsButton);
 const modalHistory = createModal('История расчетов');
 modalHistory.className = 'modal-container';
 
+//контейнер для таблицы с сохраненной историей в модальном окне
 const modalHistoryWithoutButtons = document.createElement('div');
 modalHistory.appendChild(modalHistoryWithoutButtons);
 
+/*
+кнопка для перехода к истории расчетов
+createTableHistory(); - открывает таблицу с сохраненной историей
+ */
 const modalHistoryButton = createButton('История');
 modalHistoryButton.id = 'modal-history-button';
 modalHistoryButton.onclick = () => {
@@ -48,7 +53,7 @@ modalHistoryButton.onclick = () => {
 };
 containerButtons.appendChild(modalHistoryButton);
 
-//название приложения
+//Заголовок - название приложения
 const title = document.createElement('h1');
 title.className = 'title';
 title.textContent = 'Калькулятор коммуналки';
@@ -60,6 +65,7 @@ containerWithInput.autocomplete = 'on';
 containerWithInput.className = 'container-with-input';
 container.appendChild(containerWithInput);
 
+//секция с input-сроками для данных прошлого месяца
 const tariffsForLastMonth = createSection('Прошлый месяц');
 tariffsForLastMonth.className = 'tariffs-for-lastMonth';
 tariffsForLastMonth.appendChild(createTariffsWindow(
@@ -75,6 +81,7 @@ tariffsForLastMonth.appendChild(createTariffsWindow(
 ));
 containerWithInput.appendChild(tariffsForLastMonth);
 
+//секция с input-сроками для данных текущего месяца
 const tariffsForThisMonth = createSection('Текущий месяц');
 tariffsForThisMonth.className = 'tariffs-for-thisMonth';
 tariffsForThisMonth.appendChild(createTariffsWindow(
@@ -90,7 +97,11 @@ tariffsForThisMonth.appendChild(createTariffsWindow(
 ));
 containerWithInput.appendChild(tariffsForThisMonth);
 
-//кнопка для расчета
+/*
+кнопка для расчета
+важно: после каждого нажатия кнопки "Рассчитать" расчеты сохраняются в localstorage
+и отображаются в таблице истории расчетов (для этого вызываем saveCalculationToHistory())
+ */
 const calculateButton = createButton('Рассчитать');
 calculateButton.id = 'calculate-button';
 calculateButton.onclick = () => {
@@ -104,10 +115,12 @@ resultSection.className = 'result';
 resultSection.style.display = 'none';
 container.appendChild(resultSection);
 
+//заголовок для контейнера с результатами расчета
 const resultTitle = document.createElement('h3');
 resultTitle.textContent = 'Результаты расчета';
 resultSection.appendChild(resultTitle);
 
+//контейнер, где непосредственно расчеты лежат (сделано для красивости-полосок)
 const resultsContainer = document.createElement('div');
 resultsContainer.className = 'results-container';
 resultSection.appendChild(resultsContainer);
