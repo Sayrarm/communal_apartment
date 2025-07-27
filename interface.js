@@ -9,7 +9,7 @@ containerButtons.className = 'container-buttons';
 container.appendChild(containerButtons);
 
 //модальное окно с тарифами
-const modalTariffs = createModal('Действующие тарифы');
+const modalTariffs = createModal('Действующие тарифы', ['save', 'close']);
 modalTariffs.className = 'modal-container';
 modalTariffs.appendChild(createTariffsWindow(
     't1-tariff',
@@ -33,7 +33,7 @@ modalTariffsButton.onclick = () => {
 containerButtons.appendChild(modalTariffsButton);
 
 //модальное окно с историей расчетов
-const modalHistory = createModal('История расчетов');
+const modalHistory = createModal('История расчетов', ['csv', 'close']);
 modalHistory.className = 'modal-container';
 
 //контейнер для таблицы с сохраненной историей в модальном окне

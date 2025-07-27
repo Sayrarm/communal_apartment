@@ -137,6 +137,88 @@ function saveCalculationToHistory() {
     calculationHistory = history;
 }
 
+// Функция для конвертации истории расчетов в CSV формат
+function convertHistoryToCSV() {
+    if (calculationHistory.length === 0) {
+        const emptyMessage = document.createElement('div');
+        emptyMessage.className = 'message-without-table';
+        showAnimatedMessage(emptyMessage, 'нет данных для выгрузки!')
+        modalHistoryWithoutButtons.appendChild(emptyMessage);
+
+        return null;
+    }
+
+    // Заголовки CSV
+    const headers = [
+        'Дата',
+        'Т1',
+        'Т2',
+        'Хол.вода',
+        'Гор.вода',
+        'Водоотведение',
+        'Отопление',
+        'Домофон',
+        'Т1 итог',
+        'Т2 итог',
+        'Электроэнергия итог',
+        'Хол.вода итог',
+        'Гор.вода итог',
+        'Водоотведение итог',
+        'Вода итог',
+        'Всего',
+        'Всего с арендой'
+    ];
+
+    // Строки данных
+    const rows = calculationHistory.map(entry => [
+        entry.date,
+        entry.inputs.t1Current,
+        entry.inputs.t2Current,
+        entry.inputs.coldWaterCurrent,
+        entry.inputs.hotWaterCurrent,
+        entry.results.disposal.toFixed(2),
+        entry.results.heating.toFixed(2),
+        entry.results.intercom.toFixed(2),
+        entry.results.electricT1.toFixed(2),
+        entry.results.electricT2.toFixed(2),
+        entry.results.totalElectric.toFixed(2),
+        entry.results.coldWater.toFixed(2),
+        entry.results.hotWater.toFixed(2),
+        entry.results.disposal.toFixed(2),
+        entry.results.totalWater.toFixed(2),
+        entry.results.total.toFixed(2),
+        entry.results.totalWithRent.toFixed(2)
+    ]);
+
+    // Добавляем BOM (Byte Order Mark) для правильной кодировки UTF-8
+    const BOM = "\uFEFF";
+
+    // Объединяем заголовки и данные с разделителем ";" (стандарт для Excel)
+    return BOM + [
+        headers.join(';'),
+        ...rows.map(row => row.join(';'))
+    ].join('\r\n'); // Используем \r\n для совместимости с Windows
+
+}
+
+// Функция для скачивания CSV файла
+function downloadCSV() {
+    const csvData = convertHistoryToCSV();
+    if (!csvData) return;
+
+    // Создаем blob и ссылку для скачивания
+    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `history_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.style.visibility = 'hidden';
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 //функция для получения данных из input-ввода
 function getInputValue(id) {
     const element = document.getElementById(id);

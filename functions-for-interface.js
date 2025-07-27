@@ -121,8 +121,34 @@ function createButton (buttonText) {
     return button;
 }
 
+//функция для анимации всплывающего текста
+function showAnimatedMessage(messageElement, text) {
+    // Устанавливаем текст (если передан)
+    if (text) {
+        messageElement.textContent = text;
+    }
+
+    // 1. Показываем сообщение
+    messageElement.style.display = 'flex';
+    messageElement.style.opacity = '1';
+    messageElement.classList.remove('fade-out');
+
+    // 2. Запускаем анимацию прыжка
+    messageElement.classList.add('bounce');
+
+    // 3. Через 0.8 сек запускаем исчезновение
+    setTimeout(() => {
+        messageElement.classList.add('fade-out');
+
+        // 4. Через 0.5 сек скрываем полностью
+        setTimeout(() => {
+            messageElement.style.display = 'none';
+        }, 500);
+    }, 800);
+}
+
 //функция для создания модального окна
-function createModal (modalText) {
+function createModal (modalText, buttons = ['save', 'csv', 'close']) {
 
     const modal = document.createElement('dialog');
     modal.className = 'modal';
@@ -143,22 +169,37 @@ function createModal (modalText) {
     message.style.display = 'none';
     modal.appendChild(message);
 
-    const saveButton = createButton('Сохранить');
-    saveButton.onclick = () => {
-        inputTariffs(); //подставляем значения по умолчанию, если тарифы не введены (0 - считается введенным тарифом)
-        saveToLocalStorageTariffs(); //сохраняем в localstorage
-        message.style.display = 'flex';
-    }
-    buttonSection.appendChild(saveButton);
-
-    const closeButton = createButton('Закрыть');
-    closeButton.id = 'close-button'
-    closeButton.onclick = () => {
-        message.style.display = 'none';
-        modal.close();
-        enableScroll();
-    }
-    buttonSection.appendChild(closeButton);
+    //сделали возможность изменения кнопок для разных модальных окон (вынесли их как параметры)
+    buttons.forEach(buttonType => {
+        switch (buttonType) {
+            case 'save':
+                const saveButton = createButton('Сохранить');
+                saveButton.onclick = () => {
+                    inputTariffs(); //подставляем значения по умолчанию, если тарифы не введены (0 - считается введенным тарифом)
+                    saveToLocalStorageTariffs(); //сохраняем в localstorage
+                    showAnimatedMessage(message, 'Данные сохранены!')
+                }
+                buttonSection.appendChild(saveButton);
+                break;
+            case 'csv':
+                const saveCSVButton = createButton('Сохранить в CSV');
+                saveCSVButton.onclick = () => {
+                    downloadCSV();
+                }
+                buttonSection.appendChild(saveCSVButton);
+                break;
+            case 'close':
+                const closeButton = createButton('Закрыть');
+                closeButton.id = 'close-button'
+                closeButton.onclick = () => {
+                    message.style.display = 'none';
+                    modal.close();
+                    enableScroll();
+                }
+                buttonSection.appendChild(closeButton);
+                break;
+        }
+    });
 
     return modal;
 }
