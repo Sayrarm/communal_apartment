@@ -33,7 +33,7 @@ function addCalculationLine (name, value) {
     valueName.textContent = `${value} руб.`;
 
     line.append(lineName, ' ', valueName);
-    resultsContainer.appendChild(line);
+
 
     return line;
 }
@@ -146,7 +146,7 @@ function createModal (modalText) {
     const saveButton = createButton('Сохранить');
     saveButton.onclick = () => {
         inputTariffs(); //подставляем значения по умолчанию, если тарифы не введены (0 - считается введенным тарифом)
-        saveToLocalStorage(); //сохраняем в localstorage
+        saveToLocalStorageTariffs(); //сохраняем в localstorage
         message.style.display = 'flex';
     }
     buttonSection.appendChild(saveButton);
@@ -209,17 +209,33 @@ function createTableParts(tag, titleName) {
     return thData;
 }
 
+//функция для создания таблицы в модальном окне "История Расчетов"
 function createTableHistory() {
 
-    const tableHistory = document.createElement('table');
-    modalHistory.appendChild(tableHistory);
+    // 1. Очищаем контейнер перед добавлением новых результатов
+    modalHistoryWithoutButtons.textContent = '';
 
+    // Получаем историю из localStorage
+    calculationHistory = JSON.parse(localStorage.getItem('calculationHistory')) || [];
+
+    // Если история пуста, создаем и возвращаем элемент с сообщением
+    if (calculationHistory.length === 0) {
+        const emptyMessage = document.createElement('p');
+        emptyMessage.textContent = 'История расчетов пуста';
+        return emptyMessage;
+    }
+
+    // Создаем основную таблицу
+    const tableHistory = document.createElement('table');
+
+    // Создаем заголовок таблицы
     const theadTableHistory = document.createElement('thead');
     tableHistory.appendChild(theadTableHistory);
 
     const trTheadTableHistory = document.createElement('tr');
     theadTableHistory.appendChild(trTheadTableHistory);
 
+    // Добавляем все заголовки
     trTheadTableHistory.appendChild(createTableParts('th', 'Дата'));
     trTheadTableHistory.appendChild(createTableParts('th', 'Т1'));
     trTheadTableHistory.appendChild(createTableParts('th', 'Т2'));
@@ -238,30 +254,36 @@ function createTableHistory() {
     trTheadTableHistory.appendChild(createTableParts('th', 'Всего'));
     trTheadTableHistory.appendChild(createTableParts('th', 'Всего с арендой'));
 
+    // Создаем тело таблицы
     const tbodyHistory = document.createElement('tbody');
     tableHistory.appendChild(tbodyHistory);
 
-    const trTbodyTableHistory = document.createElement('tr');
-    tbodyHistory.appendChild(trTbodyTableHistory);
+    // Добавляем данные
+    calculationHistory.forEach(calculationEntry => {
+        const trTbodyTableHistory = document.createElement('tr');
+        tbodyHistory.appendChild(trTbodyTableHistory);
 
-    trTbodyTableHistory.appendChild(createTableParts('td', '1'));
-    trTbodyTableHistory.appendChild(createTableParts('td', '2'));
-    trTbodyTableHistory.appendChild(createTableParts('td', '3'));
-    trTbodyTableHistory.appendChild(createTableParts('td', '4'));
-    trTbodyTableHistory.appendChild(createTableParts('td', '5'));
-    trTbodyTableHistory.appendChild(createTableParts('td', '6'));
-    trTbodyTableHistory.appendChild(createTableParts('td', '7'));
-    trTbodyTableHistory.appendChild(createTableParts('td', '8'));
-    trTbodyTableHistory.appendChild(createTableParts('td', '9'));
-    trTbodyTableHistory.appendChild(createTableParts('td', '10'));
-    trTbodyTableHistory.appendChild(createTableParts('td', '11'));
-    trTbodyTableHistory.appendChild(createTableParts('td', '12'));
-    trTbodyTableHistory.appendChild(createTableParts('td', '13'));
-    trTbodyTableHistory.appendChild(createTableParts('td', '14'));
-    trTbodyTableHistory.appendChild(createTableParts('td', '15'));
-    trTbodyTableHistory.appendChild(createTableParts('td', '16'));
-    trTbodyTableHistory.appendChild(createTableParts('td', '17'));
+        // Добавляем все ячейки как было
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.date));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.inputs.t1Current));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.inputs.t2Current));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.inputs.coldWaterCurrent));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.inputs.hotWaterCurrent));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.disposal.toFixed(2)));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.heating.toFixed(2)));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.intercom.toFixed(2)));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.electricT1.toFixed(2)));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.electricT2.toFixed(2)));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.totalElectric.toFixed(2)));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.coldWater.toFixed(2)));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.hotWater.toFixed(2)));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.disposal.toFixed(2)));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.totalWater.toFixed(2)));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.total.toFixed(2)));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.totalWithRent.toFixed(2)));
+    });
 
+    modalHistoryWithoutButtons.appendChild(tableHistory);
 
     return tableHistory;
 }

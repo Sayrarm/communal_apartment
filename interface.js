@@ -35,13 +35,16 @@ containerButtons.appendChild(modalTariffsButton);
 //модальное окно с историей расчетов
 const modalHistory = createModal('История расчетов');
 modalHistory.className = 'modal-container';
-modalHistory.appendChild(createTableHistory());
+
+const modalHistoryWithoutButtons = document.createElement('div');
+modalHistory.appendChild(modalHistoryWithoutButtons);
 
 const modalHistoryButton = createButton('История');
 modalHistoryButton.id = 'modal-history-button';
 modalHistoryButton.onclick = () => {
     modalHistory.showModal();
     disableScroll();
+    createTableHistory();
 };
 containerButtons.appendChild(modalHistoryButton);
 
@@ -90,7 +93,10 @@ containerWithInput.appendChild(tariffsForThisMonth);
 //кнопка для расчета
 const calculateButton = createButton('Рассчитать');
 calculateButton.id = 'calculate-button';
-calculateButton.onclick = () => calculator();
+calculateButton.onclick = () => {
+    calculator();
+    saveCalculationToHistory();
+}
 
 //контейнер с результатами расчета
 const resultSection = document.createElement('div');
