@@ -313,8 +313,8 @@ function calculator () {
     total.className = 'result-item-total';
     resultsContainer.appendChild(total);
 
-    total.appendChild(addCalculationLine('Всего к оплате', calcData.results.totalCalculation.toFixed(1)));
-    total.appendChild(addCalculationLine('Вместе с арендой', calcData.results.totalCalculationWithRent.toFixed(1)));
+    total.appendChild(addCalculationLine('Всего к оплате', calcData.results.totalCalculation.toFixed(2)));
+    total.appendChild(addCalculationLine('Вместе с арендой', calcData.results.totalCalculationWithRent.toFixed(2)));
 
     //показ контейнера с результатами расчета
     resultSection.style.display = 'flex';
