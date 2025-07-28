@@ -150,6 +150,16 @@ button:hover {
     display: flex;
     justify-content: center;
     margin: 2px;
+    transition: all 0.3s ease;
+}
+.delete-button {
+    background-color: #283747;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+.delete-button:hover {
+    background-color: #283747;
 }
 .result {
     text-transform: uppercase;

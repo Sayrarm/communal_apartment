@@ -182,14 +182,14 @@ function createModal (modalText, buttons = ['save', 'csv', 'clear', 'close']) {
                 buttonSection.appendChild(saveButton);
                 break;
             case 'csv':
-                const saveCSVButton = createButton('Сохранить в CSV');
+                const saveCSVButton = createButton('Выгрузить в CSV');
                 saveCSVButton.onclick = () => {
                     downloadCSV();
                 }
                 buttonSection.appendChild(saveCSVButton);
                 break;
             case 'clear':
-                const clearButton = createButton('Очистить');
+                const clearButton = createButton('Очистить историю');
                 clearButton.onclick = () => {
                     clearHistory();
                 }
@@ -314,7 +314,8 @@ function createTableHistory() {
     tableHistory.appendChild(tbodyHistory);
 
     // Добавляем данные из localstorage
-    calculationHistory.forEach(calculationEntry => {
+    calculationHistory.forEach((calculationEntry, index) => {
+
         const trTbodyTableHistory = document.createElement('tr');
         tbodyHistory.appendChild(trTbodyTableHistory);
 
@@ -336,6 +337,39 @@ function createTableHistory() {
         trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.totalWater));
         trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.total));
         trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.totalWithRent));
+
+        // Создаем кнопку удаления для каждой строки
+        const deleteButton = createButton('');
+        deleteButton.className = 'delete-button';
+        const icon = document.createElement('img');
+        icon.src = 'trash2.svg';
+        icon.width = 25;
+        icon.height = 25;
+        // Добавляем обработчики событий
+        deleteButton.addEventListener('mouseenter', () => {
+            icon.src = 'trash-red.svg';
+        });
+
+        deleteButton.addEventListener('mouseleave', () => {
+            icon.src = 'trash2.svg';
+        });
+        deleteButton.appendChild(icon);
+
+        // Добавляем обработчик события для кнопки удаления
+        deleteButton.onclick = () => {
+            if (confirm('Вы уверены, что хотите удалить эту запись?')) {
+                // Удаляем запись из массива
+                calculationHistory.splice(index, 1);
+
+                // Обновляем localStorage
+                localStorage.setItem('calculationHistory', JSON.stringify(calculationHistory));
+
+                // Пересоздаем таблицу
+                createTableHistory();
+            }
+        }
+
+        trTbodyTableHistory.appendChild(deleteButton);
     });
 
     modalHistoryWithoutButtons.appendChild(tableHistory);

@@ -245,7 +245,7 @@ function clearHistory() {
         //уведомление об успешной очистке
         const successMessage = document.createElement('div');
         successMessage.className = 'message';
-        modalHistoryWithoutButtons.appendChild(successMessage);
+        modalHistory.appendChild(successMessage);
 
         showAnimatedMessage(successMessage, 'История очищена!')
     }
