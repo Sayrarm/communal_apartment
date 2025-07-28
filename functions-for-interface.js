@@ -246,7 +246,9 @@ function inputTariffs() {
 //создаем части таблицы
 function createTableParts(tag, titleName) {
     const thData = document.createElement(tag);
-    thData.textContent = titleName;
+    thData.textContent = titleName === null || titleName === undefined
+        ? '0.00'
+        : (typeof titleName === 'number' ? titleName.toFixed(2) : titleName);
 
     return thData;
 }
@@ -315,18 +317,18 @@ function createTableHistory() {
         trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.inputs.t2Current));
         trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.inputs.coldWaterCurrent));
         trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.inputs.hotWaterCurrent));
-        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.disposal.toFixed(2)));
-        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.heating.toFixed(2)));
-        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.intercom.toFixed(2)));
-        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.electricT1.toFixed(2)));
-        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.electricT2.toFixed(2)));
-        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.totalElectric.toFixed(2)));
-        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.coldWater.toFixed(2)));
-        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.hotWater.toFixed(2)));
-        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.disposal.toFixed(2)));
-        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.totalWater.toFixed(2)));
-        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.total.toFixed(2)));
-        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.totalWithRent.toFixed(2)));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.disposal));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.heating));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.intercom));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.electricT1));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.electricT2));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.totalElectric));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.coldWater));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.hotWater));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.disposal));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.totalWater));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.total));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.totalWithRent));
     });
 
     modalHistoryWithoutButtons.appendChild(tableHistory);
