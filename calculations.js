@@ -115,7 +115,8 @@ function saveCalculationToHistory() {
             totalElectric: calcData.results.totalElectricCalculation,
             coldWater: calcData.results.coldWaterCalculation,
             hotWater: calcData.results.hotWaterCalculation,
-            disposal: calcData.results.disposalWaterCalculation,
+            disposal: calcData.results.disposal,
+            disposalCalc: calcData.results.disposalWaterCalculation,
             totalWater: calcData.results.totalWaterCalculation,
             heating: getSavedTariff('heating-tariff', tariffs.heating),
             intercom: getSavedTariff('intercom-tariff', tariffs.intercom),
@@ -193,7 +194,7 @@ function convertHistoryToCSV() {
         formatNumber(entry.results.totalElectric),
         formatNumber(entry.results.coldWater),
         formatNumber(entry.results.hotWater),
-        formatNumber(entry.results.disposal),
+        formatNumber(entry.results.disposalCalc),
         formatNumber(entry.results.totalWater),
         formatNumber(entry.results.total),
         formatNumber(entry.results.totalWithRent)
@@ -279,7 +280,8 @@ function calculator () {
     calcData.results.coldWaterCalculation = calcData.results.coldWater * getSavedTariff('cold-tariff', tariffs.water.cold);
     calcData.results.hotWater = (calcData.inputs.inputHotWaterCurrent - calcData.inputs.inputHotWaterLast);
     calcData.results.hotWaterCalculation = calcData.results.hotWater * getSavedTariff('hot-tariff', tariffs.water.hot);
-    calcData.results.disposalWaterCalculation = (calcData.results.coldWater + calcData.results.hotWater) * getSavedTariff('disposal-tariff', tariffs.water.disposal);
+    calcData.results.disposal = (calcData.results.coldWater + calcData.results.hotWater);
+    calcData.results.disposalWaterCalculation = calcData.results.disposal * getSavedTariff('disposal-tariff', tariffs.water.disposal);
     calcData.results.totalWaterCalculation = calcData.results.coldWaterCalculation + calcData.results.hotWaterCalculation + calcData.results.disposalWaterCalculation;
 
     //считаем итого (электроэнергия + вода + отопление + домофон) + итого с арендой жилья

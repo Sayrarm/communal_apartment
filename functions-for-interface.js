@@ -325,7 +325,7 @@ function createTableHistory() {
         trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.totalElectric));
         trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.coldWater));
         trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.hotWater));
-        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.disposal));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.disposalCalc));
         trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.totalWater));
         trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.total));
         trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.totalWithRent));
