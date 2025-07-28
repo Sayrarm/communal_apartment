@@ -148,7 +148,7 @@ function showAnimatedMessage(messageElement, text) {
 }
 
 //функция для создания модального окна
-function createModal (modalText, buttons = ['save', 'csv', 'close']) {
+function createModal (modalText, buttons = ['save', 'csv', 'clear', 'close']) {
 
     const modal = document.createElement('dialog');
     modal.className = 'modal';
@@ -187,6 +187,13 @@ function createModal (modalText, buttons = ['save', 'csv', 'close']) {
                     downloadCSV();
                 }
                 buttonSection.appendChild(saveCSVButton);
+                break;
+            case 'clear':
+                const clearButton = createButton('Очистить');
+                clearButton.onclick = () => {
+                    clearHistory();
+                }
+                buttonSection.appendChild(clearButton);
                 break;
             case 'close':
                 const closeButton = createButton('Закрыть');

@@ -229,6 +229,28 @@ function downloadCSV() {
     document.body.removeChild(link);
 }
 
+// Функция для очистки истории
+function clearHistory() {
+    // Показываем подтверждение перед очисткой
+    if (confirm('Вы действительно хотите очистить всю историю расчетов?')) {
+        // Очищаем localStorage
+        localStorage.removeItem('calculationHistory');
+
+        // Очищаем массив в памяти
+        calculationHistory = [];
+
+        // Обновляем отображение
+        createTableHistory();
+
+        //уведомление об успешной очистке
+        const successMessage = document.createElement('div');
+        successMessage.className = 'message';
+        modalHistoryWithoutButtons.appendChild(successMessage);
+
+        showAnimatedMessage(successMessage, 'История очищена!')
+    }
+}
+
 //функция для получения данных из input-ввода
 function getInputValue(id) {
     const element = document.getElementById(id);

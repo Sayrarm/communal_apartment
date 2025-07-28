@@ -33,7 +33,7 @@ modalTariffsButton.onclick = () => {
 containerButtons.appendChild(modalTariffsButton);
 
 //модальное окно с историей расчетов
-const modalHistory = createModal('История расчетов', ['csv', 'close']);
+const modalHistory = createModal('История расчетов', ['csv', 'clear', 'close']);
 modalHistory.className = 'modal-container';
 
 //контейнер для таблицы с сохраненной историей в модальном окне
