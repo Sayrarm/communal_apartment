@@ -169,25 +169,34 @@ function convertHistoryToCSV() {
         'Всего с арендой'
     ];
 
+    // Функция для форматирования чисел (замена точки на запятую)
+    const formatNumber = (num) => {
+        if (typeof num === 'number') {
+            return num.toFixed(2).replace('.', ',');
+        }
+        // Если значение не число, возвращаем как есть (например, для даты)
+        return num;
+    };
+
     // Строки данных
     const rows = calculationHistory.map(entry => [
         entry.date,
-        entry.inputs.t1Current,
-        entry.inputs.t2Current,
-        entry.inputs.coldWaterCurrent,
-        entry.inputs.hotWaterCurrent,
-        entry.results.disposal.toFixed(2),
-        entry.results.heating.toFixed(2),
-        entry.results.intercom.toFixed(2),
-        entry.results.electricT1.toFixed(2),
-        entry.results.electricT2.toFixed(2),
-        entry.results.totalElectric.toFixed(2),
-        entry.results.coldWater.toFixed(2),
-        entry.results.hotWater.toFixed(2),
-        entry.results.disposal.toFixed(2),
-        entry.results.totalWater.toFixed(2),
-        entry.results.total.toFixed(2),
-        entry.results.totalWithRent.toFixed(2)
+        formatNumber(entry.inputs.t1Current),
+        formatNumber(entry.inputs.t2Current),
+        formatNumber(entry.inputs.coldWaterCurrent),
+        formatNumber(entry.inputs.hotWaterCurrent),
+        formatNumber(entry.results.disposal),
+        formatNumber(entry.results.heating),
+        formatNumber(entry.results.intercom),
+        formatNumber(entry.results.electricT1),
+        formatNumber(entry.results.electricT2),
+        formatNumber(entry.results.totalElectric),
+        formatNumber(entry.results.coldWater),
+        formatNumber(entry.results.hotWater),
+        formatNumber(entry.results.disposal),
+        formatNumber(entry.results.totalWater),
+        formatNumber(entry.results.total),
+        formatNumber(entry.results.totalWithRent)
     ]);
 
     // Добавляем BOM (Byte Order Mark) для правильной кодировки UTF-8
