@@ -22,6 +22,8 @@ modalTariffs.appendChild(createTariffsWindow(
     'intercom-tariff',
     'rent-tariff'
 ));
+//чтобы при первом запуске программы у пользователя уже по умолчанию стояли тарифы
+inputTariffs();
 
 //кнопка для открытия модального окна с тарифами
 const modalTariffsButton = createButton('Тарифы');
