@@ -30,6 +30,15 @@ const modalTariffsButton = createButton('Тарифы');
 modalTariffsButton.id = 'modal-tariffs-button';
 modalTariffsButton.onclick = () => {
     modalTariffs.showModal();
+
+    // 1. Загружаем сохранённые значения из localStorage
+    loadFromLocalStorageTariffs();
+
+    // Теперь сохраняем initialValue
+    const inputs = modalTariffs.querySelectorAll('input[type="number"]');
+    inputs.forEach(input => {
+        input.dataset.initialValue = input.value;
+    });
     disableScroll();
 };
 containerButtons.appendChild(modalTariffsButton);

@@ -177,7 +177,13 @@ function createModal (modalText, buttons = ['save', 'csv', 'clear', 'close']) {
                 saveButton.onclick = () => {
                     inputTariffs(); //подставляем значения по умолчанию, если тарифы не введены (0 - считается введенным тарифом)
                     saveToLocalStorageTariffs(); //сохраняем в localstorage
-                    showAnimatedMessage(message, 'Данные сохранены!')
+                    showAnimatedMessage(message, 'Данные сохранены!');
+
+                    // Обновляем initialValue после сохранения
+                    const inputs = modalTariffs.querySelectorAll('input[type="number"]');
+                    inputs.forEach(input => {
+                        input.dataset.initialValue = input.value;
+                    });
                 }
                 buttonSection.appendChild(saveButton);
                 break;
@@ -199,7 +205,20 @@ function createModal (modalText, buttons = ['save', 'csv', 'clear', 'close']) {
                 const closeButton = createButton('Закрыть');
                 closeButton.id = 'close-button'
                 closeButton.onclick = () => {
-                    message.style.display = 'none';
+                    const inputs = modal.querySelectorAll('input[type="number"]');
+                    let hasUnsavedData = false;
+
+                    inputs.forEach(input => {
+                        if (input.value !== input.dataset.initialValue) { // сравниваем с сохранённым значением
+                            hasUnsavedData = true;
+                        }
+                    });
+
+                    if (hasUnsavedData) {
+                        const shouldClose = confirm('Внимание, данные не сохранены! Чтобы сохранить данные, вернитесь и нажмите кнопку "Сохранить".\n\nЗакрыть без сохранения?');
+                        if (!shouldClose) return;
+                    }
+
                     modal.close();
                     enableScroll();
                 }

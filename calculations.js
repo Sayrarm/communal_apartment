@@ -66,15 +66,15 @@ function loadFromLocalStorageTariffs() {
         // 3. Пытаемся получить сохранённое значение из localStorage
         const savedValue = localStorage.getItem(id);
         // 4. Если значение найдено (не null)
-        if (savedValue !== null) {
-            // 5. Находим поле ввода на странице по ID
-            const element = document.getElementById(id);
+        const element = document.getElementById(id);
             // 6. Если поле существует, вставляем в него сохранённое значение
             if (element) {
-                element.value = savedValue;
+                element.value = savedValue !== null ? savedValue : '';
             }
-        }
     });
+
+    // Затем применяем значения по умолчанию для пустых полей
+    inputTariffs();
 }
 
 //загружаем сохраненные в модальном окне тарифы
