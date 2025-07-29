@@ -13,6 +13,12 @@ h3 {
     text-transform: uppercase;
     font-weight: 300;
 }
+table, tbody, tr, th, td {
+    margin: 5px;
+    padding: 2px;
+    border: 1px solid #d5d8dc;
+    border-collapse: collapse;
+}
 .container {
     background-color: #34495e;
     max-width: 800px;
@@ -31,15 +37,42 @@ h3 {
     border-radius: 8px;
     border-color: transparent;
 }
+.bounce {
+    animation: bounce 0.8s ease;
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-15px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+/* Класс для плавного исчезновения */
+.fade-out {
+    opacity: 0 !important;
+}
 .message {
+    animation: bounce 1s ease;
     justify-content: center;
     padding-top: 5px;
+
+    opacity: 1;
+    /* Важно: transition только для opacity */
+    transition: opacity 0.5s ease;
+    /* Сбрасываем анимацию */
 }
 .message::before {
     content: "✓";
     margin-right: 8px;
 }
-
+.message-without-table {
+    justify-content: center;
+    padding-top: 10px;
+}
 dialog::backdrop {
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px); /* Уровень размытия */
@@ -87,7 +120,7 @@ input {
     color: white;
     font-size: 16px;
 }
-/* Убирает стрелочки в Chrome, Safari, Edge, Opera */
+/* Убирает стрелочки в input для Chrome, Safari, Edge, Opera */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -99,8 +132,8 @@ button {
     font-size: 16px;
     text-transform: uppercase;
     border: none;
-    padding: 10px;
-    border-radius: 4px;
+    padding: 8px;
+    border-radius: 5px;
     cursor: pointer;
     margin: 0 5px;
     transition: all 0.3s ease;
@@ -111,12 +144,22 @@ button:hover {
 }
 .container-buttons {
     align-self: flex-end;
-    padding: 10px 0 0 5px;
+    padding: 5px 0;
 }
 .button-section {
     display: flex;
     justify-content: center;
     margin: 2px;
+    transition: all 0.3s ease;
+}
+.delete-button {
+    background-color: #283747;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+.delete-button:hover {
+    background-color: #283747;
 }
 .result {
     text-transform: uppercase;
