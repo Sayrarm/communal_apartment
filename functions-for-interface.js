@@ -83,7 +83,7 @@ function createTariffsWindow (T1, T2, cold, hot, disposal, debt, heat, intercom,
     //долг (добавляем, только если debt !== undefined)
     if (debt !== undefined) {
         const debtSection = createSection('Долг');
-        debtSection.appendChild(createInput('Долг:', debt, 'number', tariffs.debt));
+        debtSection.appendChild(createInput('Долг (руб):', debt, 'number', tariffs.debt));
         containerTariffs.appendChild(debtSection);
     }
 
@@ -311,22 +311,22 @@ function createTableHistory() {
 
     // Добавляем все заголовки
     trTheadTableHistory.appendChild(createTableParts('th', 'Дата'));
-    trTheadTableHistory.appendChild(createTableParts('th', 'Т1'));
-    trTheadTableHistory.appendChild(createTableParts('th', 'Т2'));
-    trTheadTableHistory.appendChild(createTableParts('th', 'Хол.вода'));
-    trTheadTableHistory.appendChild(createTableParts('th', 'Гор.вода'));
-    trTheadTableHistory.appendChild(createTableParts('th', 'Водоотведение'));
-    trTheadTableHistory.appendChild(createTableParts('th', 'Отопление'));
-    trTheadTableHistory.appendChild(createTableParts('th', 'Домофон'));
-    trTheadTableHistory.appendChild(createTableParts('th', 'Т1 итог'));
-    trTheadTableHistory.appendChild(createTableParts('th', 'Т2 итог'));
-    trTheadTableHistory.appendChild(createTableParts('th', 'Электроэнергия итог'));
-    trTheadTableHistory.appendChild(createTableParts('th', 'Хол.вода итог'));
-    trTheadTableHistory.appendChild(createTableParts('th', 'Гор.вода итог'));
-    trTheadTableHistory.appendChild(createTableParts('th', 'Водоотведение итог'));
-    trTheadTableHistory.appendChild(createTableParts('th', 'Вода итог'));
-    trTheadTableHistory.appendChild(createTableParts('th', 'Всего'));
-    trTheadTableHistory.appendChild(createTableParts('th', 'Всего с арендой'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Т1 (квт•ч)'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Т2 (квт•ч)'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Хол.вода (м3)'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Гор.вода (м3)'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Водоотведение (м3)'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Отопление (руб.)'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Домофон (руб.)'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Т1 итог (руб)'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Т2 итог (руб)'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Электроэнергия итог (руб)'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Хол.вода итог (руб)'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Гор.вода итог (руб)'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Водоотведение итог (руб)'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Вода итог (руб)'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Всего (руб)'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Всего с арендой (руб)'));
 
     // Создаем тело таблицы
     const tbodyHistory = document.createElement('tbody');

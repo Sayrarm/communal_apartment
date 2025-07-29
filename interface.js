@@ -101,7 +101,7 @@ tariffsForThisMonth.appendChild(createTariffsWindow(
     'cold-current',
     'hot-current',
     undefined,
-    'debt-current',
+    undefined,
     undefined,
     undefined,
     undefined
