@@ -173,7 +173,7 @@ function convertHistoryToCSV() {
     // Функция для форматирования чисел (замена точки на запятую)
     const formatNumber = (num) => {
         if (typeof num === 'number') {
-            return num.toFixed(2).replace('.', ',');
+            return num.toFixed(3).replace('.', ',');
         }
         // Если значение не число, возвращаем как есть (например, для даты)
         return num;
@@ -312,15 +312,15 @@ function calculator () {
 
     //выводим в интерфейс результат подсчета
     const electricCalc = addCalculationSection();
-    electricCalc.appendChild(addCalculationLine('Электроэнергия Т1', calcData.results.electricCalculationT1.toFixed(2)));
-    electricCalc.appendChild(addCalculationLine('Электроэнергия Т2', calcData.results.electricCalculationT2.toFixed(2)));
-    electricCalc.appendChild(addCalculationLine('Электроэнергия ИТОГ', calcData.results.totalElectricCalculation.toFixed(2)));
+    electricCalc.appendChild(addCalculationLine('Электроэнергия Т1', calcData.results.electricCalculationT1.toFixed(3)));
+    electricCalc.appendChild(addCalculationLine('Электроэнергия Т2', calcData.results.electricCalculationT2.toFixed(3)));
+    electricCalc.appendChild(addCalculationLine('Электроэнергия ИТОГ', calcData.results.totalElectricCalculation.toFixed(3)));
 
     const waterCalc = addCalculationSection();
-    waterCalc.appendChild(addCalculationLine('Холодная вода', calcData.results.coldWaterCalculation.toFixed(2)));
-    waterCalc.appendChild(addCalculationLine('Горячая вода', calcData.results.hotWaterCalculation.toFixed(2)));
-    waterCalc.appendChild(addCalculationLine('Водоотведение', calcData.results.disposalWaterCalculation.toFixed(2)));
-    waterCalc.appendChild(addCalculationLine('Водоснабжение ИТОГ', calcData.results.totalWaterCalculation.toFixed(2)));
+    waterCalc.appendChild(addCalculationLine('Холодная вода', calcData.results.coldWaterCalculation.toFixed(3)));
+    waterCalc.appendChild(addCalculationLine('Горячая вода', calcData.results.hotWaterCalculation.toFixed(3)));
+    waterCalc.appendChild(addCalculationLine('Водоотведение', calcData.results.disposalWaterCalculation.toFixed(3)));
+    waterCalc.appendChild(addCalculationLine('Водоснабжение ИТОГ', calcData.results.totalWaterCalculation.toFixed(3)));
 
     const heatingCalc = addCalculationSection();
     heatingCalc.appendChild(addCalculationLine('Отопление', getSavedTariff('heating-tariff', tariffs.heating)));

@@ -274,7 +274,7 @@ function createTableParts(tag, titleName) {
     const thData = document.createElement(tag);
     thData.textContent = titleName === null || titleName === undefined
         ? '0.00'
-        : (typeof titleName === 'number' ? titleName.toFixed(2) : titleName);
+        : (typeof titleName === 'number' ? titleName.toFixed(3) : titleName);
 
     return thData;
 }
