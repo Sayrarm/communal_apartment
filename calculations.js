@@ -1,18 +1,18 @@
 //глобально объявляем переменные - тарифы по умолчанию
 const tariffs = {
     electro: {
-        t1: 7.45,
-        t2: 3.02
+        t1: 8.60,
+        t2: 3.71
     },
     water: {
-        cold: 59.80,
-        hot: 272.14,
-        disposal: 45.71
+        cold: 65.77,
+        hot: 312.50,
+        disposal: 51.62
     },
-    heating: 1878.19,
+    heating: 2122.02,
     intercom: 68.54,
-    rent: 55000,
-    debt: 0
+    rent: 55000.00,
+    debt: ''
 };
 
 //глобально объявляем переменные из функции calculator()
