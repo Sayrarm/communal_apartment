@@ -22,8 +22,12 @@ modalTariffs.appendChild(createTariffsWindow(
     'intercom-tariff',
     'rent-tariff'
 ));
-//чтобы при первом запуске программы у пользователя уже по умолчанию стояли тарифы
-inputTariffs();
+
+const clearInputButton = createButton('Очистить');
+clearInputButton.onclick = () => {
+    document.getElementById('container-with-input').reset();
+}
+containerButtons.appendChild(clearInputButton);
 
 //кнопка для открытия модального окна с тарифами
 const modalTariffsButton = createButton('Тарифы');
@@ -73,6 +77,7 @@ container.appendChild(title);
 //строки для ввода данных для расчета:
 const containerWithInput = document.createElement('form');
 containerWithInput.autocomplete = 'on';
+containerWithInput.id = 'container-with-input'
 containerWithInput.className = 'container-with-input';
 container.appendChild(containerWithInput);
 
