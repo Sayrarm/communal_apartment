@@ -172,10 +172,31 @@ button:hover {
     align-items: center;
     max-width: 562px;
     width: 100%;
+
+}
+.result:hover {
+    background-color: #283747;
 }
 .results-container {
     max-width: 100%;
     width: 100%;
+    display: block;
+}
+/* Если кнопка активна (контент виден) */
+.result.active .results-container {
+    display: none;
+}
+.result-title {
+    font-size: 16px;
+    color: #5499c7;
+    margin: 0;
+}
+/* Меняем текст заголовка при открытии/закрытии */
+.result.active .result-title::after {
+    content: "Развернуть";
+}
+.result:not(.active) .result-title::after {
+    content: "Свернуть";
 }
 .calc-section {
     border-top: 1px solid #d5d8dc;
