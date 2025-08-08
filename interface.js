@@ -124,28 +124,3 @@ calculateButton.onclick = () => {
     calculator();
     saveCalculationToHistory();
 }
-
-//контейнер с результатами расчета
-const resultSection = createButton('')
-resultSection.className = 'result';
-resultSection.style.display = 'none';
-container.appendChild(resultSection);
-
-resultSection.addEventListener('click', function() {
-    this.classList.toggle('active'); // Добавляем/убираем класс 'active'
-});
-
-//заголовок для контейнера с результатами расчета
-const resultTitle = document.createElement('h3');
-resultTitle.textContent = 'Результаты расчета';
-resultSection.appendChild(resultTitle);
-
-//контейнер, где непосредственно расчеты лежат (сделано для красивости-полосок)
-const resultsContainer = document.createElement('div');
-resultsContainer.className = 'results-container';
-resultSection.appendChild(resultsContainer);
-
-//заголовок для контейнера с результатами расчета
-const buttonTitle = document.createElement('h3');
-buttonTitle.className = 'result-title';
-resultSection.appendChild(buttonTitle);

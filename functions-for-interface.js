@@ -11,14 +11,7 @@ function createSection (titleText) {
     return section;
 }
 
-//функция для создания секции расчетов (разделяются полосками для красивости)
-function addCalculationSection () {
-    const totalSection = document.createElement('div');
-    totalSection.className = 'calc-section';
-    resultsContainer.appendChild(totalSection);
 
-    return totalSection;
-}
 
 //функция для создания строки для расчета
 function addCalculationLine (name, value) {

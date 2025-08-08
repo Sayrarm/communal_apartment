@@ -271,8 +271,51 @@ function getInputValue(id) {
 //основной калькулятор для подсчета коммуналки
 function calculator () {
 
-    // 1. Очищаем контейнер перед добавлением новых результатов
-    resultsContainer.textContent = '';
+    //контейнер с результатами расчета
+    const resultSection = createButton('')
+    resultSection.className = 'result';
+    resultSection.style.display = 'flex';
+    container.appendChild(resultSection);
+
+    // Добавляем/убираем класс 'active', чтобы сворачивать и разворачивать контейнер
+    resultSection.addEventListener('click', function() {
+        this.classList.toggle('active');
+    });
+
+//заголовок для контейнера с результатами расчета
+    const resultTitle = document.createElement('h3');
+    resultTitle.textContent = 'Результаты расчета';
+    resultSection.appendChild(resultTitle);
+
+//контейнер, где непосредственно расчеты лежат (сделано для красивости-полосок)
+    const resultsContainer = document.createElement('div');
+    resultsContainer.className = 'results-container';
+    resultSection.appendChild(resultsContainer);
+
+//заголовок для контейнера с результатами расчета
+    const buttonTitle = document.createElement('h3');
+    buttonTitle.className = 'result-title';
+    resultSection.appendChild(buttonTitle);
+
+// Добавляем новый контейнер в DOM перед существующими результатами
+    const existingResults = container.querySelectorAll('.result');
+    if (existingResults.length > 0) {
+        container.insertBefore(resultSection, existingResults[0]);
+    } else {
+        container.appendChild(resultSection);
+    }
+
+    // 1. Очищаем контейнер перед добавлением новых результатов (пока убрано - неактуально)
+    //resultsContainer.textContent = '';
+
+    //функция для создания секции расчетов (разделяются полосками для красивости)
+    function addCalculationSection () {
+        const totalSection = document.createElement('div');
+        totalSection.className = 'calc-section';
+        resultsContainer.appendChild(totalSection);
+
+        return totalSection;
+    }
 
     //переменные для использования введенных данных (если данных нет, то по умолчанию применяется 0)
     calcData.inputs.inputT1Last = getInputValue('t1-last');
