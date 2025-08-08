@@ -138,13 +138,12 @@ button {
     margin: 0 5px;
     transition: all 0.3s ease;
 }
-button:hover {
-    background-color: white;
-    color: #5499c7;
-}
 .container-buttons {
     align-self: flex-end;
     padding: 5px 0;
+}
+.container-low-buttons {
+    align-self: center;
 }
 .button-section {
     display: flex;
@@ -157,9 +156,6 @@ button:hover {
     border: none;
     padding: 0;
     margin: 0;
-}
-.delete-button:hover {
-    background-color: #283747;
 }
 .result {
     text-transform: uppercase;
@@ -174,9 +170,6 @@ button:hover {
     width: 100%;
 
 }
-.result:hover {
-    background-color: #283747;
-}
 .results-container {
     max-width: 100%;
     width: 100%;
@@ -188,7 +181,6 @@ button:hover {
 }
 .result-title {
     font-size: 16px;
-    color: #5499c7;
     margin: 0;
 }
 /* Меняем текст заголовка при открытии/закрытии */
@@ -233,4 +225,22 @@ button:hover {
         max-width: 330px;
         width: 100%;
     }
+}
+/* убираем hover анимации для моб версии */
+@media (hover: hover) and (pointer: fine) {
+    button:hover {
+        background-color: white;
+        color: #5499c7;
+    }
+    .delete-button:hover {
+        background-color: #283747;
+    }
+    .result:hover {
+        background-color: #283747;
+    }
+}
+/* Стили для active (для моб версии) */
+button:active, .delete-button:active, .result:active {
+    transform: scale(0.97); /* Легкое уменьшение */
+    opacity: 0.9; /* Легкое затемнение */
 }

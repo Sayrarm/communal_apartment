@@ -26,9 +26,6 @@ modalTariffs.appendChild(createTariffsWindow(
 const clearInputButton = createButton('Очистить');
 clearInputButton.onclick = () => {
     document.getElementById('container-with-input').reset();
-
-    const results = document.querySelectorAll('.result');
-    results.forEach(result => result.remove());
 }
 containerButtons.appendChild(clearInputButton);
 
@@ -116,6 +113,11 @@ tariffsForThisMonth.appendChild(createTariffsWindow(
 ));
 containerWithInput.appendChild(tariffsForThisMonth);
 
+//контейнер для верхних кнопок
+const containerLowButtons = document.createElement('div');
+containerLowButtons.className = 'container-low-buttons';
+container.appendChild(containerLowButtons);
+
 /*
 кнопка для расчета
 важно: после каждого нажатия кнопки "Рассчитать" расчеты сохраняются в localstorage
@@ -127,3 +129,11 @@ calculateButton.onclick = () => {
     calculator();
     saveCalculationToHistory();
 }
+containerLowButtons.appendChild(calculateButton);
+
+const clearCalculationsButton = createButton('Очистить расчеты');
+clearCalculationsButton.onclick = () => {
+    const results = document.querySelectorAll('.result');
+    results.forEach(result => result.remove());
+}
+containerLowButtons.appendChild(clearCalculationsButton);
