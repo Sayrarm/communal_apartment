@@ -67,10 +67,10 @@ function loadFromLocalStorageTariffs() {
         const savedValue = localStorage.getItem(id);
         // 4. Если значение найдено (не null)
         const element = document.getElementById(id);
-            // 6. Если поле существует, вставляем в него сохранённое значение
-            if (element) {
-                element.value = savedValue !== null ? savedValue : '';
-            }
+        // 6. Если поле существует, вставляем в него сохранённое значение
+        if (element) {
+            element.value = savedValue !== null ? savedValue : '';
+        }
     });
 
     // Затем применяем значения по умолчанию для пустых полей
@@ -217,7 +217,7 @@ function downloadCSV() {
     if (!csvData) return;
 
     // Создаем blob и ссылку для скачивания
-    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    const blob = new Blob([csvData], {type: 'text/csv;charset=utf-8;'});
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.setAttribute('href', url);
@@ -269,7 +269,7 @@ function getInputValue(id) {
 }
 
 //основной калькулятор для подсчета коммуналки
-function calculator () {
+function calculator() {
 
     //контейнер с результатами расчета
     const resultSection = createButton('')
@@ -277,27 +277,22 @@ function calculator () {
     resultSection.style.display = 'flex';
     container.appendChild(resultSection);
 
-    // Добавляем/убираем класс 'active', чтобы сворачивать и разворачивать контейнер
-    resultSection.addEventListener('click', function() {
-        this.classList.toggle('active');
-    });
-
-//заголовок для контейнера с результатами расчета
+    //заголовок для контейнера с результатами расчета
     const resultTitle = document.createElement('h3');
     resultTitle.textContent = 'Результаты расчета';
     resultSection.appendChild(resultTitle);
 
-//контейнер, где непосредственно расчеты лежат (сделано для красивости-полосок)
+    //контейнер, где непосредственно расчеты лежат (сделано для красивости-полосок)
     const resultsContainer = document.createElement('div');
     resultsContainer.className = 'results-container';
     resultSection.appendChild(resultsContainer);
 
-//заголовок для контейнера с результатами расчета
+    //заголовок для контейнера с результатами расчета
     const buttonTitle = document.createElement('h3');
     buttonTitle.className = 'result-title';
     resultSection.appendChild(buttonTitle);
 
-// Добавляем новый контейнер в DOM перед существующими результатами
+    // Добавляем новый контейнер в DOM перед существующими результатами
     const existingResults = container.querySelectorAll('.result');
     if (existingResults.length > 0) {
         container.insertBefore(resultSection, existingResults[0]);
@@ -305,11 +300,24 @@ function calculator () {
         container.appendChild(resultSection);
     }
 
+    // Сворачиваем все старые блоки, кроме нового
+    existingResults.forEach((result) => {
+        result.classList.add('active'); // <- сворачиваем старые расчеты
+    });
+
+    // Добавляем/убираем класс 'active', чтобы сворачивать и разворачивать контейнер
+    resultSection.addEventListener('click', function () {
+        this.classList.toggle('active');
+    });
+
+    // 6. Принудительно убираем 'active' у нового блока
+    resultSection.classList.remove('active');
+
     // 1. Очищаем контейнер перед добавлением новых результатов (пока убрано - неактуально)
     //resultsContainer.textContent = '';
 
     //функция для создания секции расчетов (разделяются полосками для красивости)
-    function addCalculationSection () {
+    function addCalculationSection() {
         const totalSection = document.createElement('div');
         totalSection.className = 'calc-section';
         resultsContainer.appendChild(totalSection);
