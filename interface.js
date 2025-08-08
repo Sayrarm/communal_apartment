@@ -26,6 +26,9 @@ modalTariffs.appendChild(createTariffsWindow(
 const clearInputButton = createButton('Очистить');
 clearInputButton.onclick = () => {
     document.getElementById('container-with-input').reset();
+
+    const results = document.querySelectorAll('.result');
+    results.forEach(result => result.remove());
 }
 containerButtons.appendChild(clearInputButton);
 
