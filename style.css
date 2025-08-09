@@ -181,7 +181,7 @@ button {
 }
 .result-title {
     font-size: 12px;
-    margin: 0;
+    margin: 5px 0 0 0;
 }
 /* Меняем текст заголовка при открытии/закрытии */
 .result.active .result-title::after {
