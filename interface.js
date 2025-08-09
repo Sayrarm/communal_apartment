@@ -22,8 +22,12 @@ modalTariffs.appendChild(createTariffsWindow(
     'intercom-tariff',
     'rent-tariff'
 ));
-//чтобы при первом запуске программы у пользователя уже по умолчанию стояли тарифы
-inputTariffs();
+
+const clearInputButton = createButton('Очистить');
+clearInputButton.onclick = () => {
+    document.getElementById('container-with-input').reset();
+}
+containerButtons.appendChild(clearInputButton);
 
 //кнопка для открытия модального окна с тарифами
 const modalTariffsButton = createButton('Тарифы');
@@ -73,6 +77,7 @@ container.appendChild(title);
 //строки для ввода данных для расчета:
 const containerWithInput = document.createElement('form');
 containerWithInput.autocomplete = 'on';
+containerWithInput.id = 'container-with-input'
 containerWithInput.className = 'container-with-input';
 container.appendChild(containerWithInput);
 
@@ -108,6 +113,11 @@ tariffsForThisMonth.appendChild(createTariffsWindow(
 ));
 containerWithInput.appendChild(tariffsForThisMonth);
 
+//контейнер для верхних кнопок
+const containerLowButtons = document.createElement('div');
+containerLowButtons.className = 'container-low-buttons';
+container.appendChild(containerLowButtons);
+
 /*
 кнопка для расчета
 важно: после каждого нажатия кнопки "Рассчитать" расчеты сохраняются в localstorage
@@ -119,21 +129,11 @@ calculateButton.onclick = () => {
     calculator();
     saveCalculationToHistory();
 }
+containerLowButtons.appendChild(calculateButton);
 
-//контейнер с результатами расчета
-const resultSection = document.createElement('div');
-resultSection.className = 'result';
-resultSection.style.display = 'none';
-container.appendChild(resultSection);
-
-//заголовок для контейнера с результатами расчета
-const resultTitle = document.createElement('h3');
-resultTitle.textContent = 'Результаты расчета';
-resultSection.appendChild(resultTitle);
-
-//контейнер, где непосредственно расчеты лежат (сделано для красивости-полосок)
-const resultsContainer = document.createElement('div');
-resultsContainer.className = 'results-container';
-resultSection.appendChild(resultsContainer);
-
-
+const clearCalculationsButton = createButton('Очистить расчеты');
+clearCalculationsButton.onclick = () => {
+    const results = document.querySelectorAll('.result');
+    results.forEach(result => result.remove());
+}
+containerLowButtons.appendChild(clearCalculationsButton);

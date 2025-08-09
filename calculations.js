@@ -1,18 +1,18 @@
 //глобально объявляем переменные - тарифы по умолчанию
 const tariffs = {
     electro: {
-        t1: 7.45,
-        t2: 3.02
+        t1: 8.60,
+        t2: 3.71
     },
     water: {
-        cold: 59.80,
-        hot: 272.14,
-        disposal: 45.71
+        cold: 65.77,
+        hot: 312.50,
+        disposal: 51.62
     },
-    heating: 1878.19,
+    heating: 2122.02,
     intercom: 68.54,
-    rent: 55000,
-    debt: 0
+    rent: 55000.00,
+    debt: ''
 };
 
 //глобально объявляем переменные из функции calculator()
@@ -67,10 +67,10 @@ function loadFromLocalStorageTariffs() {
         const savedValue = localStorage.getItem(id);
         // 4. Если значение найдено (не null)
         const element = document.getElementById(id);
-            // 6. Если поле существует, вставляем в него сохранённое значение
-            if (element) {
-                element.value = savedValue !== null ? savedValue : '';
-            }
+        // 6. Если поле существует, вставляем в него сохранённое значение
+        if (element) {
+            element.value = savedValue !== null ? savedValue : '';
+        }
     });
 
     // Затем применяем значения по умолчанию для пустых полей
@@ -173,7 +173,7 @@ function convertHistoryToCSV() {
     // Функция для форматирования чисел (замена точки на запятую)
     const formatNumber = (num) => {
         if (typeof num === 'number') {
-            return num.toFixed(2).replace('.', ',');
+            return num.toFixed(3).replace('.', ',');
         }
         // Если значение не число, возвращаем как есть (например, для даты)
         return num;
@@ -217,7 +217,7 @@ function downloadCSV() {
     if (!csvData) return;
 
     // Создаем blob и ссылку для скачивания
-    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    const blob = new Blob([csvData], {type: 'text/csv;charset=utf-8;'});
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.setAttribute('href', url);
@@ -269,10 +269,61 @@ function getInputValue(id) {
 }
 
 //основной калькулятор для подсчета коммуналки
-function calculator () {
+function calculator() {
 
-    // 1. Очищаем контейнер перед добавлением новых результатов
-    resultsContainer.textContent = '';
+    //контейнер с результатами расчета
+    const resultSection = createButton('')
+    resultSection.className = 'result';
+    resultSection.style.display = 'flex';
+    container.appendChild(resultSection);
+
+    //заголовок для контейнера с результатами расчета
+    const resultTitle = document.createElement('h3');
+    resultTitle.textContent = 'Результаты расчета';
+    resultSection.appendChild(resultTitle);
+
+    //контейнер, где непосредственно расчеты лежат (сделано для красивости-полосок)
+    const resultsContainer = document.createElement('div');
+    resultsContainer.className = 'results-container';
+    resultSection.appendChild(resultsContainer);
+
+    //заголовок для контейнера с результатами расчета
+    const buttonTitle = document.createElement('h3');
+    buttonTitle.className = 'result-title';
+    resultSection.appendChild(buttonTitle);
+
+    // Добавляем новый контейнер в DOM перед существующими результатами
+    const existingResults = container.querySelectorAll('.result');
+    if (existingResults.length > 0) {
+        container.insertBefore(resultSection, existingResults[0]);
+    } else {
+        container.appendChild(resultSection);
+    }
+
+    // Сворачиваем все старые блоки, кроме нового
+    existingResults.forEach((result) => {
+        result.classList.add('active'); // <- сворачиваем старые расчеты
+    });
+
+    // Добавляем/убираем класс 'active', чтобы сворачивать и разворачивать контейнер
+    resultSection.addEventListener('click', function () {
+        this.classList.toggle('active');
+    });
+
+    // 6. Принудительно убираем 'active' у нового блока
+    resultSection.classList.remove('active');
+
+    // 1. Очищаем контейнер перед добавлением новых результатов (пока убрано - неактуально)
+    //resultsContainer.textContent = '';
+
+    //функция для создания секции расчетов (разделяются полосками для красивости)
+    function addCalculationSection() {
+        const totalSection = document.createElement('div');
+        totalSection.className = 'calc-section';
+        resultsContainer.appendChild(totalSection);
+
+        return totalSection;
+    }
 
     //переменные для использования введенных данных (если данных нет, то по умолчанию применяется 0)
     calcData.inputs.inputT1Last = getInputValue('t1-last');
@@ -312,15 +363,15 @@ function calculator () {
 
     //выводим в интерфейс результат подсчета
     const electricCalc = addCalculationSection();
-    electricCalc.appendChild(addCalculationLine('Электроэнергия Т1', calcData.results.electricCalculationT1.toFixed(2)));
-    electricCalc.appendChild(addCalculationLine('Электроэнергия Т2', calcData.results.electricCalculationT2.toFixed(2)));
-    electricCalc.appendChild(addCalculationLine('Электроэнергия ИТОГ', calcData.results.totalElectricCalculation.toFixed(2)));
+    electricCalc.appendChild(addCalculationLine('Электроэнергия Т1', calcData.results.electricCalculationT1.toFixed(3)));
+    electricCalc.appendChild(addCalculationLine('Электроэнергия Т2', calcData.results.electricCalculationT2.toFixed(3)));
+    electricCalc.appendChild(addCalculationLine('Электроэнергия ИТОГ', calcData.results.totalElectricCalculation.toFixed(3)));
 
     const waterCalc = addCalculationSection();
-    waterCalc.appendChild(addCalculationLine('Холодная вода', calcData.results.coldWaterCalculation.toFixed(2)));
-    waterCalc.appendChild(addCalculationLine('Горячая вода', calcData.results.hotWaterCalculation.toFixed(2)));
-    waterCalc.appendChild(addCalculationLine('Водоотведение', calcData.results.disposalWaterCalculation.toFixed(2)));
-    waterCalc.appendChild(addCalculationLine('Водоснабжение ИТОГ', calcData.results.totalWaterCalculation.toFixed(2)));
+    waterCalc.appendChild(addCalculationLine('Холодная вода', calcData.results.coldWaterCalculation.toFixed(3)));
+    waterCalc.appendChild(addCalculationLine('Горячая вода', calcData.results.hotWaterCalculation.toFixed(3)));
+    waterCalc.appendChild(addCalculationLine('Водоотведение', calcData.results.disposalWaterCalculation.toFixed(3)));
+    waterCalc.appendChild(addCalculationLine('Водоснабжение ИТОГ', calcData.results.totalWaterCalculation.toFixed(3)));
 
     const heatingCalc = addCalculationSection();
     heatingCalc.appendChild(addCalculationLine('Отопление', getSavedTariff('heating-tariff', tariffs.heating)));

@@ -11,14 +11,7 @@ function createSection (titleText) {
     return section;
 }
 
-//функция для создания секции расчетов (разделяются полосками для красивости)
-function addCalculationSection () {
-    const totalSection = document.createElement('div');
-    totalSection.className = 'calc-section';
-    resultsContainer.appendChild(totalSection);
 
-    return totalSection;
-}
 
 //функция для создания строки для расчета
 function addCalculationLine (name, value) {
@@ -274,7 +267,7 @@ function createTableParts(tag, titleName) {
     const thData = document.createElement(tag);
     thData.textContent = titleName === null || titleName === undefined
         ? '0.00'
-        : (typeof titleName === 'number' ? titleName.toFixed(2) : titleName);
+        : (typeof titleName === 'number' ? titleName.toFixed(3) : titleName);
 
     return thData;
 }
@@ -364,14 +357,21 @@ function createTableHistory() {
         icon.src = 'trash2.svg';
         icon.width = 25;
         icon.height = 25;
-        // Добавляем обработчики событий
-        deleteButton.addEventListener('mouseenter', () => {
-            icon.src = 'trash-red.svg';
-        });
 
-        deleteButton.addEventListener('mouseleave', () => {
-            icon.src = 'trash2.svg';
-        });
+        // Добавляем обработчики событий (смена цвета кнопки мусорки)
+
+        // Проверяем, есть ли тач-события (мобильное устройство)
+        const isTouchDevice = 'ontouchstart' in window;
+
+        // Добавляем обработчики только для НЕ-тач устройств
+        if (!isTouchDevice) {
+            deleteButton.addEventListener('mouseenter', () => {
+                icon.src = 'trash-red.svg';
+            });
+            deleteButton.addEventListener('mouseleave', () => {
+                icon.src = 'trash2.svg';
+            });
+        }
         deleteButton.appendChild(icon);
 
         // Добавляем обработчик события для кнопки удаления

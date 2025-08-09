@@ -138,13 +138,12 @@ button {
     margin: 0 5px;
     transition: all 0.3s ease;
 }
-button:hover {
-    background-color: white;
-    color: #5499c7;
-}
 .container-buttons {
     align-self: flex-end;
     padding: 5px 0;
+}
+.container-low-buttons {
+    align-self: center;
 }
 .button-section {
     display: flex;
@@ -158,9 +157,6 @@ button:hover {
     padding: 0;
     margin: 0;
 }
-.delete-button:hover {
-    background-color: #283747;
-}
 .result {
     text-transform: uppercase;
     font-weight: 300;
@@ -172,10 +168,27 @@ button:hover {
     align-items: center;
     max-width: 562px;
     width: 100%;
+
 }
 .results-container {
     max-width: 100%;
     width: 100%;
+    display: block;
+}
+/* Если кнопка активна (контент виден) */
+.result.active .results-container {
+    display: none;
+}
+.result-title {
+    font-size: 12px;
+    margin: 5px 0 0 0;
+}
+/* Меняем текст заголовка при открытии/закрытии */
+.result.active .result-title::after {
+    content: "Развернуть";
+}
+.result:not(.active) .result-title::after {
+    content: "Свернуть";
 }
 .calc-section {
     border-top: 1px solid #d5d8dc;
@@ -212,4 +225,22 @@ button:hover {
         max-width: 330px;
         width: 100%;
     }
+}
+/* убираем hover анимации для моб версии */
+@media (hover: hover) and (pointer: fine) {
+    button:hover {
+        background-color: white;
+        color: #5499c7;
+    }
+    .delete-button:hover {
+        background-color: #283747;
+    }
+    .result:hover {
+        background-color: #283747;
+    }
+}
+/* Стили для active (для моб версии) */
+button:active, .delete-button:active, .result:active {
+    transform: scale(0.97); /* Легкое уменьшение */
+    opacity: 0.9; /* Легкое затемнение */
 }
