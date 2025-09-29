@@ -167,6 +167,7 @@ function convertHistoryToCSV() {
         'Водоотведение итог (руб)',
         'Вода итог (руб)',
         'Всего (руб)',
+        'Долг (руб)',
         'Всего с арендой (руб)'
     ];
 
@@ -197,6 +198,7 @@ function convertHistoryToCSV() {
         formatNumber(entry.results.disposalCalc),
         formatNumber(entry.results.totalWater),
         formatNumber(entry.results.total),
+        formatNumber(entry.inputs.debtLast),
         formatNumber(entry.results.totalWithRent)
     ]);
 
