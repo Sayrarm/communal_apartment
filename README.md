@@ -16,7 +16,4 @@ Communal Apartment Calculator:
 - the ability to download the calculation history in a CSV file (opens in excel);
 - the ability to perform calculations several times without updating the page (the "Clear" button clears the input lines, the "Clear calculations" button deletes all calculations on the page (the "refresh page/F5" button also deletes all calculations));
 
-Screenshot:
-![image](<img width="1023" height="707" alt="image" src="https://github.com/user-attachments/assets/fc72dcc0-074e-4257-a6e2-7789b288d5be" />)
-
 Deploy: [link](https://sayrarm.github.io/communal_apartment/)
