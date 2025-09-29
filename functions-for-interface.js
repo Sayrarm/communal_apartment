@@ -319,6 +319,7 @@ function createTableHistory() {
     trTheadTableHistory.appendChild(createTableParts('th', 'Водоотведение итог (руб)'));
     trTheadTableHistory.appendChild(createTableParts('th', 'Вода итог (руб)'));
     trTheadTableHistory.appendChild(createTableParts('th', 'Всего (руб)'));
+    trTheadTableHistory.appendChild(createTableParts('th', 'Долг(руб)'));
     trTheadTableHistory.appendChild(createTableParts('th', 'Всего с арендой (руб)'));
 
     // Создаем тело таблицы
@@ -348,6 +349,7 @@ function createTableHistory() {
         trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.disposalCalc));
         trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.totalWater));
         trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.total));
+        trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.inputs.debtLast));
         trTbodyTableHistory.appendChild(createTableParts('td', calculationEntry.results.totalWithRent));
 
         // Создаем кнопку удаления для каждой строки
