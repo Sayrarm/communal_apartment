@@ -32,7 +32,7 @@ function addCalculationLine (name, value) {
 }
 
 //функция для создания input-строки
-function createInput (labelText, id, type, defaultValue) {
+function createInput (labelText, id, name, autocomplete, defaultValue) {
     const group = document.createElement('div');
     group.className = 'input-group';
 
@@ -42,7 +42,9 @@ function createInput (labelText, id, type, defaultValue) {
     group.appendChild(label);
 
     const input = document.createElement('input');
-    input.type = type;
+    input.type = 'number';
+    input.name = name;
+    input.autocomplete = autocomplete;
     input.title = 'Введите значение';
     input.id = id;
     input.value = defaultValue;
@@ -59,45 +61,45 @@ function createTariffsWindow (T1, T2, cold, hot, disposal, debt, heat, intercom,
 
     //электричество
     const electricPower = createSection('Электроэнергия');
-    electricPower.appendChild(createInput('Тариф Т1 (кВт·ч):', T1, 'number'));
-    electricPower.appendChild(createInput('Тариф Т2 (кВт·ч):', T2, 'number'));
+    electricPower.appendChild(createInput('Тариф Т1 (кВт·ч):', T1, 't1_meter', 't1_meter'));
+    electricPower.appendChild(createInput('Тариф Т2 (кВт·ч):', T2, 't2_meter', 't2_meter'));
     containerTariffs.appendChild(electricPower);
 
     //водоснабжение
     const waterSupply = createSection('Водоснабжение');
-    waterSupply.appendChild(createInput('Холодная вода (м3):', cold, 'number'));
-    waterSupply.appendChild(createInput('Горячая вода (м3):', hot, 'number'));
+    waterSupply.appendChild(createInput('Холодная вода (м3):', cold, 'cold_meter', 'cold_meter'));
+    waterSupply.appendChild(createInput('Горячая вода (м3):', hot, 'hot_meter', 'hot_meter'));
 
     if (disposal !== undefined) {
-        waterSupply.appendChild(createInput('Водоотведение (м3):', disposal, 'number', tariffs.water.disposal));
+        waterSupply.appendChild(createInput('Водоотведение (м3):', disposal, 'disposal_tariff','disposal_tariff', tariffs.water.disposal));
     }
     containerTariffs.appendChild(waterSupply);
 
     //долг (добавляем, только если debt !== undefined)
     if (debt !== undefined) {
         const debtSection = createSection('Долг');
-        debtSection.appendChild(createInput('Долг (руб):', debt, 'number', tariffs.debt));
+        debtSection.appendChild(createInput('Долг (руб):', debt, 'dept', 'dept', tariffs.debt));
         containerTariffs.appendChild(debtSection);
     }
 
     // Отопление (добавляем, только если heat !== undefined)
     if (heat !== undefined) {
         const heating = createSection('Отопление');
-        heating.appendChild(createInput('Абон. плата:', heat, 'number', tariffs.heating));
+        heating.appendChild(createInput('Абон. плата:', heat, 'heat_tariff', 'heat_tariff', tariffs.heating));
         containerTariffs.appendChild(heating);
     }
 
     // Домофон (добавляем, только если intercom !== undefined)
     if (intercom !== undefined) {
         const intercomSystem = createSection('Домофон');
-        intercomSystem.appendChild(createInput('Абон. плата:', intercom, 'number', tariffs.intercom));
+        intercomSystem.appendChild(createInput('Абон. плата:', intercom, 'intercom_tariff', 'intercom_tariff', tariffs.intercom));
         containerTariffs.appendChild(intercomSystem);
     }
 
     //Аренда квартиры
     if (rent !== undefined) {
         const rentApartment = createSection('Аренда за квартиру');
-        rentApartment.appendChild(createInput('Ежемес. платеж:', rent, 'number', tariffs.rent));
+        rentApartment.appendChild(createInput('Ежемес. платеж:', rent, 'rent_tariff', 'rent_tariff', tariffs.rent));
         containerTariffs.appendChild(rentApartment);
     }
 
