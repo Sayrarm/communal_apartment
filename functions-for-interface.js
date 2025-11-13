@@ -45,7 +45,7 @@ function createInput (labelText, id, name, autocomplete, defaultValue) {
     input.type = 'number';
     input.name = name;
     input.autocomplete = autocomplete;
-    input.step="any";
+    input.step="0,001";
     input.title = 'Введите значение';
     input.id = id;
     input.value = defaultValue;
