@@ -1,15 +1,15 @@
 //глобально объявляем переменные - тарифы по умолчанию
 const tariffs = {
     electro: {
-        t1: 8.60,
-        t2: 3.71
+        t1: 8.74,
+        t2: 3.77
     },
     water: {
-        cold: 65.77,
+        cold: 66.87,
         hot: 312.50,
-        disposal: 51.62
+        disposal: 52.48
     },
-    heating: 2122.02,
+    heating: 2217.51,
     intercom: 68.54,
     rent: 55000.00,
     debt: ''
