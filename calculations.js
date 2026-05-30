@@ -6,7 +6,7 @@ const tariffs = {
     },
     water: {
         cold: 66.87,
-        hot: 312.50,
+        hot: 317.71,
         disposal: 52.48
     },
     heating: 2217.51,
